@@ -172,7 +172,7 @@ void PtNewMethod::Loop(Int_t ev){
     	}
     }
     if(BIsegmentcheck)m_h_DeltaThetaBI->Fill(atan(segmentBISlope) - atan(1.0/pSA_superpointSlope_BI) );
-    if(BMsegmentcheck)m_h_DeltaThetaBI->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
+    if(BMsegmentcheck)m_h_DeltaThetaBM->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
     //barrel alpha
     if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
@@ -202,4 +202,6 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_PtvsBarrelAlpha->Write();
 	m_h_BarrelBeta->Write();
 	m_h_PtvsBarrelBeta->Write();
+	m_h_DeltaThetaBI->Write();
+	m_h_DeltaThetaBM->Write();
 }
