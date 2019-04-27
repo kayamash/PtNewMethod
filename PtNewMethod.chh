@@ -314,14 +314,6 @@ public:
     m_pSA_dR = 0;
     m_pSA_pass = 0;
     m_pSA_sAddress = 0;
-    m_pSA_rpcX = 0;
-    m_pSA_rpcY = 0;
-    m_pSA_rpcZ = 0;
-    m_pSA_rpcR = 0;
-    m_pSA_mdtZ = 0;
-    m_pSA_mdtR = 0;
-    m_pSA_mdtPhi = 0;
-    m_pSA_mdthitChamber = 0;
     m_pSA_phims = 0;
     m_pSA_phibe = 0;
     m_pSA_roieta = 0;
