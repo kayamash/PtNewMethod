@@ -303,21 +303,9 @@ public:
     m_pSA_superpointSlope_BM = 0;
     m_pEFTAG_pass = 0;
     m_sumReqdREF = 0;
-    for(Int_t i = 0i < 10;++i){
-      m_probe_segment_etaIndex[i] = 0;
-      m_probe_segment_chamberIndex[i] = 0;
-      m_probe_segment_x[i] = 0;
-      m_probe_segment_y[i] = 0;
-      m_probe_segment_z[i] = 0;
-      m_probe_segment_px[i] = 0;
-      m_probe_segment_py[i] = 0;
-      m_probe_segment_pz[i] = 0;
-      m_probe_segment_nPrecisionHits[i] = 0;
-      m_probe_segment_sector[i] = 0;
-    }
-
 
       //setting each branch address
+    /*
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
     tChain->SetBranchAddress("RunNumber",&m_rNumber,&b_rNumber);
     tChain->SetBranchAddress("mes_name",&m_mes_name,&b_mes_name);
@@ -366,6 +354,7 @@ public:
     tChain->SetBranchAddress("probe_mesL1_pass",&m_pL1_pass,&b_pL1_pass);
     tChain->SetBranchAddress("probe_mesL1_dR",&m_pL1_dR,&b_pL1_dR);
     tChain->SetBranchAddress("sumReqdRL1",&m_sumReqdRL1,&b_sumReqdRL1);
+    */
     tChain->SetBranchAddress("probe_mesSA_pt",&m_pSA_pt,&b_pSA_pt);
     tChain->SetBranchAddress("probe_mesSA_eta",&m_pSA_eta,&b_pSA_eta);
     tChain->SetBranchAddress("probe_mesSA_phi",&m_pSA_phi,&b_pSA_phi);
