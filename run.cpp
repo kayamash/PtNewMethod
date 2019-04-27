@@ -16,17 +16,19 @@ const bool EventFullScan = kTRUE;//kTRUE = All Event,kFALSE = 1000000 events tes
 void run(){
   cout<<"start!"<<endl;
   //Add chain
-  TChain *chain = new TChain("t_tap");
+  TChain *chain1 = new TChain("t_tap");
   std::ifstream ifs(inputfilelist.c_str());
   std::string str;
   while(getline(ifs,str)){
-  	chain->Add(str.c_str());
+  	chain1->Add(str.c_str());
   	cout<<str<<endl;
   }
+
+  if(!tr1)cout<<"tree failed!"<<endl;
   cout<<"chain->Add() end"<<endl;
   PtNewMethod m(chain,trigger,proc);
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
-  cout<<"Loop start"<<endl;
+  cout<<"Total Events are "<<chain->GetEntries()<<endl;
   for(Int_t i = 0;i < events;i++){
     m.Loop(i);
   }
