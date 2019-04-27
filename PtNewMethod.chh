@@ -300,6 +300,7 @@ public:
     m_pSA_superpointR_EE = 0;
     m_pSA_superpointR_CSC = 0;
     m_pSA_superpointR_BEE = 0;
+    m_pSA_superpointR_BME = 0;
     m_pSA_superpointSlope_BI = 0;
     m_pSA_superpointSlope_BM = 0;
     m_pEFTAG_pass = 0;
