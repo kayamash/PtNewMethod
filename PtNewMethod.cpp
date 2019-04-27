@@ -44,9 +44,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 }
 
 void PtNewMethod::Loop(Int_t ev){
-	cout<<"check0"<<endl;
 	tChain->GetEntry(ev);
-	cout<<"check1"<<endl;
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pextCB_dR = 1; 
@@ -153,7 +151,6 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_superpointSlope_BM = m_pSA_superpointSlope_BM->at(method);
 		}
 	}
-	cout<<"check2"<<endl;
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
 	cout<<ev<<endl;
     //segment
@@ -193,6 +190,7 @@ void PtNewMethod::Loop(Int_t ev){
     //barrel beta end
 
     //For LUT
+    /*
     Double_t PhiIntegral = 0;
     if(pSA_sAddress == 0 || pSA_sAddress == 1){
     	if(pSA_phi < -2.5)PhiIntegral = pSA_phi + TMath::Pi();
@@ -212,6 +210,10 @@ void PtNewMethod::Loop(Int_t ev){
     	if(pSA_phi > 2.40)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
     	m_h_SmallPhi->Fill(PhiIntegral);
     }
+    */
+
+
+    
 }
 
 void PtNewMethod::Finalize(TFile *tf1,std::string filename){
