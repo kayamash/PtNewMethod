@@ -25,7 +25,6 @@ void run(){
   }
 
   if(!chain1)cout<<"tree failed!"<<endl;
-  cout<<"chain->Add() end"<<endl;
   cout<<"Total Events are "<<chain1->GetEntries()<<endl;
   PtNewMethod m(chain1,trigger,proc);
   const Int_t events = (EventFullScan) ? (chain1->GetEntries()) : (1000000);
