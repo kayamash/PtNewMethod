@@ -33,7 +33,7 @@ class PtNewMethod
 private:
   //for tree
   TTree *tChain;
-    Float_t m_aipc;
+  Float_t m_aipc;
   unsigned long long int m_eNumber;
   int m_rNumber;
   Double_t m_toff_pt;
@@ -74,12 +74,6 @@ private:
   Double_t m_tSA_pt;
   Double_t m_tSA_eta;
   Double_t m_tSA_phi;
-  Double_t m_tCB_pt;
-  Double_t m_tCB_eta;
-  Double_t m_tCB_phi;
-  Double_t m_tEF_pt;
-  Double_t m_tEF_eta;
-  Double_t m_tEF_phi;
   Double_t m_sumReqdREF;
 
   std::vector<std::string> *m_mes_name;
@@ -124,27 +118,15 @@ private:
   std::vector<Double_t> *m_pSA_superpointR_BEE;
   std::vector<Double_t> *m_pSA_superpointSlope_BI;
   std::vector<Double_t> *m_pSA_superpointSlope_BM;
-  std::vector<Double_t> *m_pCB_pt;
-  std::vector<Double_t> *m_pCB_eta;
-  std::vector<Double_t> *m_pCB_phi;
-  std::vector<Double_t> *m_pCB_dR;
-  std::vector<Int_t> *m_pCB_pass;
-  std::vector<Double_t> *m_pEF_pt;
-  std::vector<Double_t> *m_pEF_eta;
-  std::vector<Double_t> *m_pEF_phi;
-  std::vector<Double_t> *m_pEF_dR;
-  std::vector<Int_t> *m_pEF_pass;
   std::vector<Int_t> *m_pEFTAG_pass;
 
   std::string m_method_name;
   Int_t m_proc;
-  Double_t m_reqL1dR;
 
   //TBranch *b_aipc;
   TBranch *b_eNumber;
   TBranch *b_rNumber;
   TBranch *b_mes_name;
-  TBranch *b_aipc;
   TBranch *b_tag_proc;
   TBranch *b_tag_pt;
   TBranch *b_tag_eta;
@@ -184,12 +166,6 @@ private:
   TBranch *b_tSA_pt;
   TBranch *b_tSA_eta;
   TBranch *b_tSA_phi;
-  TBranch *b_tCB_pt;
-  TBranch *b_tCB_eta;
-  TBranch *b_tCB_phi;
-  TBranch *b_tEF_pt;
-  TBranch *b_tEF_eta;
-  TBranch *b_tEF_phi;
   TBranch *b_pL1_pt;
   TBranch *b_pL1_eta;
   TBranch *b_pL1_phi;
@@ -231,16 +207,6 @@ private:
   TBranch *b_pSA_superpointR_BEE;
   TBranch *b_pSA_superpointSlope_BI;
   TBranch *b_pSA_superpointSlope_BM;
-
-  TBranch *b_pCB_pt;
-  TBranch *b_pCB_eta;
-  TBranch *b_pCB_phi;
-  TBranch *b_pCB_dR;
-  TBranch *b_pCB_pass;
-  TBranch *b_pEF_pt;
-  TBranch *b_pEF_eta;
-  TBranch *b_pEF_phi;
-  TBranch *b_pEF_dR;
   TBranch *b_sumReqdREF;
   TBranch *b_pEF_pass;
   TBranch *b_pEFTAG_pass;
@@ -294,12 +260,6 @@ public:
     m_tSA_pt = 0;
     m_tSA_eta = 0;
     m_tSA_phi = 0;
-    m_tCB_pt = 0;
-    m_tCB_eta = 0;
-    m_tCB_phi = 0;
-    m_tEF_pt = 0;
-    m_tEF_eta = 0;
-    m_tEF_phi = 0;
     m_mes_name = 0;
     m_pL1_pt = 0;
     m_pL1_eta = 0;
@@ -341,16 +301,6 @@ public:
     m_pSA_superpointR_BEE = 0;
     m_pSA_superpointSlope_BI = 0;
     m_pSA_superpointSlope_BM = 0;
-    m_pCB_pt = 0;
-    m_pCB_eta = 0;
-    m_pCB_phi = 0;
-    m_pCB_dR = 0;
-    m_pCB_pass = 0;
-    m_pEF_pt = 0;
-    m_pEF_eta = 0;
-    m_pEF_phi = 0;
-    m_pEF_dR = 0;
-    m_pEF_pass = 0;
     m_pEFTAG_pass = 0;
     m_sumReqdREF = 0;
 
@@ -359,7 +309,6 @@ public:
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
     tChain->SetBranchAddress("RunNumber",&m_rNumber,&b_rNumber);
     tChain->SetBranchAddress("mes_name",&m_mes_name,&b_mes_name);
-    tChain->SetBranchAddress("AverageInteractionsPerCrossing",&m_aipc,&b_aipc);
     tChain->SetBranchAddress("tag_proc",&m_tag_proc,&b_tag_proc);
     tChain->SetBranchAddress("tag_pt",&m_toff_pt,&b_tag_pt);
     tChain->SetBranchAddress("tag_eta",&m_toff_eta,&b_tag_eta);
@@ -399,12 +348,6 @@ public:
     tChain->SetBranchAddress("tag_SA_pt",&m_tSA_pt,&b_tSA_pt);
     tChain->SetBranchAddress("tag_SA_eta",&m_tSA_eta,&b_tSA_eta);
     tChain->SetBranchAddress("tag_SA_phi",&m_tSA_phi,&b_tSA_phi);
-    tChain->SetBranchAddress("tag_CB_pt",&m_tCB_pt,&b_tCB_pt);
-    tChain->SetBranchAddress("tag_CB_eta",&m_tCB_eta,&b_tCB_eta);
-    tChain->SetBranchAddress("tag_CB_phi",&m_tCB_phi,&b_tCB_phi);
-    tChain->SetBranchAddress("tag_EF_pt",&m_tEF_pt,&b_tEF_pt);
-    tChain->SetBranchAddress("tag_EF_eta",&m_tEF_eta,&b_tEF_eta);
-    tChain->SetBranchAddress("tag_EF_phi",&m_tEF_phi,&b_tEF_phi);
     tChain->SetBranchAddress("probe_mesL1_pt",&m_pL1_pt,&b_pL1_pt);
     tChain->SetBranchAddress("probe_mesL1_eta",&m_pL1_eta,&b_pL1_eta);
     tChain->SetBranchAddress("probe_mesL1_phi",&m_pL1_phi,&b_pL1_phi);
@@ -446,16 +389,6 @@ public:
     tChain->SetBranchAddress("probe_mesSA_superPointR_BEE",&m_pSA_superpointR_BEE,&b_pSA_superpointR_BEE);
     tChain->SetBranchAddress("probe_mesSA_superPointSlope_BI",&m_pSA_superpointSlope_BI,&b_pSA_superpointSlope_BI);
     tChain->SetBranchAddress("probe_mesSA_superPointSlope_BM",&m_pSA_superpointSlope_BM,&b_pSA_superpointSlope_BM);
-    tChain->SetBranchAddress("probe_mesCB_pt",&m_pCB_pt,&b_pCB_pt);
-    tChain->SetBranchAddress("probe_mesCB_eta",&m_pCB_eta,&b_pCB_eta);
-    tChain->SetBranchAddress("probe_mesCB_phi",&m_pCB_phi,&b_pCB_phi);
-    tChain->SetBranchAddress("probe_mesCB_pass",&m_pCB_pass,&b_pCB_pass);
-    tChain->SetBranchAddress("probe_mesCB_dR",&m_pCB_dR,&b_pCB_dR);
-    tChain->SetBranchAddress("probe_mesEF_pt",&m_pEF_pt,&b_pEF_pt);
-    tChain->SetBranchAddress("probe_mesEF_eta",&m_pEF_eta,&b_pEF_eta);
-    tChain->SetBranchAddress("probe_mesEF_phi",&m_pEF_phi,&b_pEF_phi);
-    tChain->SetBranchAddress("probe_mesEF_pass",&m_pEF_pass,&b_pEF_pass);
-    tChain->SetBranchAddress("probe_mesEF_dR",&m_pEF_dR,&b_pEF_dR);
     tChain->SetBranchAddress("sumReqdREF",&m_sumReqdREF,&b_sumReqdREF);
     tChain->SetBranchAddress("probe_mesEFTAG_pass",&m_pEFTAG_pass,&b_pEFTAG_pass);
 
