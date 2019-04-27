@@ -44,7 +44,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 
 void PtNewMethod::Loop(Int_t ev){
 	tChain->GetEntry(ev);
-	cout<<ev<<endl;
+	cout<<"test"<<endl;
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pL1_pt = -99999;
@@ -87,8 +87,10 @@ void PtNewMethod::Loop(Int_t ev){
 	Double_t pSA_superpointSlope_BI = 0;
 	Double_t pSA_superpointSlope_BM = 0;
 	Int_t pEFTAG_pass = -1;
+	cout<<"test"<<endl;
 	for(Int_t method = 0;method < 25;method++){
 		if(m_mes_name->at(method) == m_method_name){
+			cout<<"test"<<endl;
 			pL1_pt = m_pL1_pt->at(method);
 			pSA_pt = m_pSA_pt->at(method);
 			pL1_eta = m_pL1_eta->at(method);
@@ -107,6 +109,7 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_ptTGC = m_pSA_pttgc->at(method);
 			pSA_ptalpha = m_pSA_ptalpha->at(method);
 			pSA_ptbeta = m_pSA_ptbeta->at(method);
+			cout<<"test"<<endl;
 			pSA_superpointZ_BI = m_pSA_superpointZ_BI->at(method);
 			pSA_superpointZ_BM = m_pSA_superpointZ_BM->at(method);
 			pSA_superpointZ_BO = m_pSA_superpointZ_BO->at(method);
@@ -129,9 +132,12 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_superpointR_BEE = m_pSA_superpointR_BEE->at(method);
 			pSA_superpointSlope_BI = m_pSA_superpointSlope_BI->at(method);
 			pSA_superpointSlope_BM = m_pSA_superpointSlope_BM->at(method);
+			cout<<"test"<<endl;
 		}
 	}
+	cout<<"test"<<endl;
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
+	cout<<"test"<<endl;
     //segment
 	Double_t segmentBISlope = 0;
 	Double_t segmentBMSlope = 0;
