@@ -151,7 +151,7 @@ void PtNewMethod::Loop(Int_t ev){
         }
     }
 
-    if(!CutAll(m_pEFTAG_pass,pL1_pass))continue;
+    if(!CutAll(pEFTAG_pass,pL1_pass))return;
     //segment
     Double_t segmentBISlope = 0;
     Double_t segmentBMSlope = 0;
