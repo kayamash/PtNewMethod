@@ -189,6 +189,7 @@ void PtNewMethod::Loop(Int_t ev){
     //barrel beta end
 
     //For LUT
+    /*
     Double_t PhiIntegral = 0;
     if(pSA_sAddress == 0 || pSA_sAddress == 1){
     	if(pSA_phi < -2.5)PhiIntegral = pSA_phi + TMath::Pi();
@@ -208,6 +209,7 @@ void PtNewMethod::Loop(Int_t ev){
     	if(pSA_phi > 2.40)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
     	m_h_SmallPhi->Fill(PhiIntegral);
     }
+    */
 
 
 }
@@ -220,7 +222,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_PtvsBarrelBeta->Write();
 	m_h_DeltaThetaBI->Write();
 	m_h_DeltaThetaBM->Write();
-	m_h_LargePhi->Write();
-	m_h_SmallPhi->Write();
+	//m_h_LargePhi->Write();
+	//m_h_SmallPhi->Write();
 	cout<<"finish!!"<<endl;
 }
