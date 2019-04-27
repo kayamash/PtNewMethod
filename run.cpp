@@ -28,6 +28,7 @@ void run(){
   cout<<"Total Events are "<<chain1->GetEntries()<<endl;
   PtNewMethod m(chain1,trigger,proc);
   const Int_t events = (EventFullScan) ? (chain1->GetEntries()) : (1000000);
+  cout<<"loop start!"<<endl;
   for(Int_t i = 0;i < events;i++){
     m.Loop(i);
   }
