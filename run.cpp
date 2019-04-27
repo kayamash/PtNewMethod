@@ -29,6 +29,7 @@ void run(){
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
   cout<<"loop start!"<<endl;
   for(Int_t i = 0;i < events;i++){
+  	if(i%1000000 == 0) cout<<"The event is "<<i<<endl;
     m.Loop(i);
   }
 

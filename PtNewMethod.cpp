@@ -43,9 +43,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 }
 
 void PtNewMethod::Loop(Int_t ev){
-	cout<<ev<<endl;
 	tChain->GetEntry(ev);
-	cout<<ev<<endl;
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pL1_pt = -99999;
