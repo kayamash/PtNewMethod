@@ -164,6 +164,9 @@ private:
   TBranch *b_probe_segment_x;
   TBranch *b_probe_segment_y;
   TBranch *b_probe_segment_z;
+  TBranch *b_probe_segment_px;
+  TBranch *b_probe_segment_py;
+  TBranch *b_probe_segment_pz;
   TBranch *b_probe_segment_nPrecisionHits;
   TBranch *b_probe_segment_sector;
   TBranch *b_tp_dR;
@@ -275,12 +278,6 @@ public:
     m_tSA_pt = 0;
     m_tSA_eta = 0;
     m_tSA_phi = 0;
-    m_tCB_pt = 0;
-    m_tCB_eta = 0;
-    m_tCB_phi = 0;
-    m_tEF_pt = 0;
-    m_tEF_eta = 0;
-    m_tEF_phi = 0;
     m_mes_name = 0;
     m_pL1_pt = 0;
     m_pL1_eta = 0;
@@ -380,12 +377,6 @@ public:
     tChain->SetBranchStatus("tag_SA_pt",1);
     tChain->SetBranchStatus("tag_SA_eta",1);
     tChain->SetBranchStatus("tag_SA_phi",1);
-    tChain->SetBranchStatus("tag_CB_pt",1);
-    tChain->SetBranchStatus("tag_CB_eta",1);
-    tChain->SetBranchStatus("tag_CB_phi",1);
-    tChain->SetBranchStatus("tag_EF_pt",1);
-    tChain->SetBranchStatus("tag_EF_eta",1);
-    tChain->SetBranchStatus("tag_EF_phi",1);
     tChain->SetBranchStatus("probe_mesL1_pt",1);
     tChain->SetBranchStatus("probe_mesL1_eta",1);
     tChain->SetBranchStatus("probe_mesL1_phi",1);
@@ -482,12 +473,6 @@ public:
     tChain->SetBranchAddress("tag_SA_pt",&m_tSA_pt,&b_tSA_pt);
     tChain->SetBranchAddress("tag_SA_eta",&m_tSA_eta,&b_tSA_eta);
     tChain->SetBranchAddress("tag_SA_phi",&m_tSA_phi,&b_tSA_phi);
-    tChain->SetBranchAddress("tag_CB_pt",&m_tCB_pt,&b_tCB_pt);
-    tChain->SetBranchAddress("tag_CB_eta",&m_tCB_eta,&b_tCB_eta);
-    tChain->SetBranchAddress("tag_CB_phi",&m_tCB_phi,&b_tCB_phi);
-    tChain->SetBranchAddress("tag_EF_pt",&m_tEF_pt,&b_tEF_pt);
-    tChain->SetBranchAddress("tag_EF_eta",&m_tEF_eta,&b_tEF_eta);
-    tChain->SetBranchAddress("tag_EF_phi",&m_tEF_phi,&b_tEF_phi);
     tChain->SetBranchAddress("probe_mesL1_pt",&m_pL1_pt,&b_pL1_pt);
     tChain->SetBranchAddress("probe_mesL1_eta",&m_pL1_eta,&b_pL1_eta);
     tChain->SetBranchAddress("probe_mesL1_phi",&m_pL1_phi,&b_pL1_phi);

@@ -59,7 +59,7 @@ void PtNewMethod::Loop(Int_t ev){
     Double_t pSA_dR = 1;
     Int_t pSA_pass = 0;
     Double_t pSA_sAddress = -1;
-    ouble_t pSA_phims = -99999;
+    Double_t pSA_phims = -99999;
     Double_t pSA_phibe = -99999;
     float pSA_roieta = -99999;
     float pSA_roiphi = -99999;
