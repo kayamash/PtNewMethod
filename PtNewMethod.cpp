@@ -115,6 +115,7 @@ void PtNewMethod::Loop(Int_t ev){
             pSA_phibe = m_pSA_phibe->at(method);
             pSA_roieta = m_pSA_roieta->at(method);
             pSA_roiphi = m_pSA_roiphi->at(method);
+            /*
             pSA_rpcX = &(m_pSA_rpcX->at(method));
             pSA_rpcY = &(m_pSA_rpcY->at(method));
             pSA_rpcZ = &(m_pSA_rpcZ->at(method));
@@ -123,6 +124,7 @@ void PtNewMethod::Loop(Int_t ev){
             pSA_mdtR = &(m_pSA_mdtR->at(method));
             pSA_mdtPhi = &(m_pSA_mdtPhi->at(method));
             pSA_mdthitChamber = &(m_pSA_mdthitChamber->at(method));
+            */
             pSA_ptTGC = m_pSA_pttgc->at(method);
             pSA_ptalpha = m_pSA_ptalpha->at(method);
             pSA_ptbeta = m_pSA_ptbeta->at(method);
