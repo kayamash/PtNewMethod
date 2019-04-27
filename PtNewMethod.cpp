@@ -62,9 +62,11 @@ void PtNewMethod::Loop(Int_t ev){
 	Double_t pSA_phibe = -99999;
 	float pSA_roieta = -99999;
 	float pSA_roiphi = -99999;
+	/*
 	Double_t pSA_ptTGC = -99999;
 	Double_t pSA_ptalpha = -99999;
 	Double_t pSA_ptbeta = -99999;
+	*/
 	Double_t pSA_superpointZ_BI = 0;
 	Double_t pSA_superpointZ_BM = 0;
 	Double_t pSA_superpointZ_BO = 0;
@@ -105,9 +107,11 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_phibe = m_pSA_phibe->at(method);
 			pSA_roieta = m_pSA_roieta->at(method);
 			pSA_roiphi = m_pSA_roiphi->at(method);
+			/*
 			pSA_ptTGC = m_pSA_pttgc->at(method);
 			pSA_ptalpha = m_pSA_ptalpha->at(method);
 			pSA_ptbeta = m_pSA_ptbeta->at(method);
+			*/
 			pSA_superpointZ_BI = m_pSA_superpointZ_BI->at(method);
 			pSA_superpointZ_BM = m_pSA_superpointZ_BM->at(method);
 			pSA_superpointZ_BO = m_pSA_superpointZ_BO->at(method);
