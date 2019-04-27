@@ -27,11 +27,12 @@
 #include <TChain.h>
 
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
-     if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
-          return kTRUE;
-     }else{
-          return kFALSE;
-     }
+    if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && m_poff_charge*m_tag_charge == -1){
+    //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
+        return kTRUE;
+    }else{
+        return kFALSE;
+    }
 }
 
 bool PtNewMethod::BarrelDicision(Float_t eta){
@@ -190,9 +191,26 @@ void PtNewMethod::Loop(Int_t ev){
     }
     //barrel beta end
 
-
-
-
+    //For LUT
+    Double_t PhiIntegral = 0;
+    if(pSA_sAddress == 0 || pSA_sAddress == 1){
+    	if(pSA_phi < -2.5)PhiIntegral = pSA_phi + TMath::Pi();
+    	if(pSA_phi > -2.5 || pSA_phi < -1.0)PhiIntegral = pSA_phi + TMath::Pi()/2.;
+    	if(pSA_phi > -1.0 || pSA_phi < 0.24)PhiIntegral = pSA_phi;
+    	if(pSA_phi > -0.24 || pSA_phi < 1.03)PhiIntegral = pSA_phi - TMath::Pi()/4.;
+    	if(pSA_phi > 1.03 || pSA_phi < 1.80)PhiIntegral = pSA_phi - TMath::Pi()/2.;
+    	if(pSA_phi > 1.80 || pSA_phi < 2.60)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
+    	if(pSA_phi > 2.60)PhiIntegral = pSA_phi - TMath::Pi();
+    	m_h_LargePhi->Fill(PhiIntegral);
+    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){
+    	if(pSA_phi < -2.0)PhiIntegral = pSA_phi + TMath::Pi();
+    	if(pSA_phi > -2.0 || pSA_phi < 0.)PhiIntegral = pSA_phi + TMath::Pi()/4.;
+    	if(pSA_phi > 0. || pSA_phi < 0.8)PhiIntegral = pSA_phi;
+    	if(pSA_phi > 0.8 || pSA_phi < 1.55)PhiIntegral = pSA_phi - TMath::Pi()/4.;
+    	if(pSA_phi > 1.55 || pSA_phi < 2.40)PhiIntegral = pSA_phi - TMath::Pi()/2.;
+    	if(pSA_phi > 2.40)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
+    	m_h_SmallPhi->Fill(PhiIntegral);
+    }
 
 }
 
@@ -204,4 +222,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_PtvsBarrelBeta->Write();
 	m_h_DeltaThetaBI->Write();
 	m_h_DeltaThetaBM->Write();
+	m_h_LargePhi->Write();
+	m_h_SmallPhi->Write();
+	cout<<"finish!!"<<endl;
 }
