@@ -14,19 +14,22 @@ const Int_t proc = 1;//Jpsitap = 1,Ztap = 3
 const bool EventFullScan = kTRUE;//kTRUE = All Event,kFALSE = 1000000 events test
 
 void run(){
+  cout<<"start!"<<endl;
   //Add chain
   TChain *chain = new TChain("t_tap");
   std::ifstream ifs(inputfilelist.c_str());
   std::string str;
   while(getline(ifs,str))chain->Add(str.c_str());
-  
+  cout<<"chain->Add() end"<<endl;
   PtNewMethod m(chain,trigger,proc);
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
+  cout<<"Loop start"<<endl;
   for(Int_t i = 0;i < events;i++){
     m.Loop(i);
   }
 
   TFile *output_file = new TFile(outputfilename.c_str(),"RECREATE");
+  cout<<"finalize"<<endl;
   m.Finalize(output_file,LUTname);
   delete  output_file;
   delete chain;
