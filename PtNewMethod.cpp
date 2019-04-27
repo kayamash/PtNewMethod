@@ -24,7 +24,6 @@
 #include <TMath.h>
 #include <TBranch.h>
 #include <TObject.h>
-#include <TChain.h>
 
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
 	if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && m_poff_charge*m_tag_charge == -1){
@@ -44,6 +43,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 }
 
 void PtNewMethod::Loop(Int_t ev){
+	cout<<ev<<endl;
 	tChain->GetEntry(ev);
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
