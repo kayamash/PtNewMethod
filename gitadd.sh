@@ -1,7 +1,7 @@
 #!/bin/bash
 branch="master"
 file1="run.cpp"
-file2="PtNewMethod.cxx"
+file2="PtNewMethod.cpp"
 file3="PtNewMethod.chh"
 file4="gitadd.sh"
 add="git add "
