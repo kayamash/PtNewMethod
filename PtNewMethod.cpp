@@ -46,6 +46,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 void PtNewMethod::Loop(Int_t ev){
 	cout<<"check0"<<endl;
 	tChain->GetEntry(ev);
+	cout<<"check1"<<endl;
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pextCB_dR = 1; 
@@ -98,7 +99,6 @@ void PtNewMethod::Loop(Int_t ev){
 	Double_t pSA_superpointSlope_BI = 0;
 	Double_t pSA_superpointSlope_BM = 0;
 	Int_t pEFTAG_pass = -1;
-	cout<<"check!"<<endl;
 	for(Int_t method = 0;method < 25;method++){
 		if(m_mes_name->at(method) == m_method_name){
 			pL1_pt = m_pL1_pt->at(method);
