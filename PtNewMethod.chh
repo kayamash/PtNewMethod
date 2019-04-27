@@ -33,7 +33,6 @@ class PtNewMethod
 private:
   //for tree
   TTree *tChain;
-  Float_t m_aipc;
   unsigned long long int m_eNumber;
   int m_rNumber;
   Double_t m_toff_pt;
@@ -67,13 +66,7 @@ private:
   Double_t m_poff_z0;
   Double_t m_tp_extdR;
   Double_t m_tp_dR;
-  Double_t m_tL1_pt;
-  Double_t m_tL1_eta;
-  Double_t m_tL1_phi;
   Double_t m_sumReqdRL1;
-  Double_t m_tSA_pt;
-  Double_t m_tSA_eta;
-  Double_t m_tSA_phi;
   Double_t m_sumReqdREF;
 
   std::vector<std::string> *m_mes_name;
@@ -88,35 +81,18 @@ private:
   std::vector<Double_t> *m_pSA_phi;
   std::vector<Double_t> *m_pSA_dR;
   std::vector<Double_t> *m_pSA_sAddress;
-  std::vector<Double_t> *m_pSA_phims;
-  std::vector<Double_t> *m_pSA_phibe;
   std::vector<float> *m_pSA_roieta;
   std::vector<float> *m_pSA_roiphi;
   std::vector<Int_t> *m_pSA_pass;
-  /*
-  std::vector<Double_t> *m_pSA_pttgc;
-  std::vector<Double_t> *m_pSA_ptalpha;
-  std::vector<Double_t> *m_pSA_ptbeta;
-  */
   std::vector<Double_t> *m_pSA_superpointZ_BI;
   std::vector<Double_t> *m_pSA_superpointZ_BM;
   std::vector<Double_t> *m_pSA_superpointZ_BO;
   std::vector<Double_t> *m_pSA_superpointZ_BME;
-  std::vector<Double_t> *m_pSA_superpointZ_EI;
-  std::vector<Double_t> *m_pSA_superpointZ_EM;
-  std::vector<Double_t> *m_pSA_superpointZ_EO;
-  std::vector<Double_t> *m_pSA_superpointZ_EE;
-  std::vector<Double_t> *m_pSA_superpointZ_CSC;
   std::vector<Double_t> *m_pSA_superpointZ_BEE;
   std::vector<Double_t> *m_pSA_superpointR_BI;
   std::vector<Double_t> *m_pSA_superpointR_BM;
   std::vector<Double_t> *m_pSA_superpointR_BO;
   std::vector<Double_t> *m_pSA_superpointR_BME;
-  std::vector<Double_t> *m_pSA_superpointR_EI;
-  std::vector<Double_t> *m_pSA_superpointR_EM;
-  std::vector<Double_t> *m_pSA_superpointR_EO;
-  std::vector<Double_t> *m_pSA_superpointR_EE;
-  std::vector<Double_t> *m_pSA_superpointR_CSC;
   std::vector<Double_t> *m_pSA_superpointR_BEE;
   std::vector<Double_t> *m_pSA_superpointSlope_BI;
   std::vector<Double_t> *m_pSA_superpointSlope_BM;
@@ -125,7 +101,6 @@ private:
   std::string m_method_name;
   Int_t m_proc;
 
-  //TBranch *b_aipc;
   TBranch *b_eNumber;
   TBranch *b_rNumber;
   TBranch *b_mes_name;
@@ -162,12 +137,6 @@ private:
   TBranch *b_probe_segment_sector;
   TBranch *b_tp_dR;
   TBranch *b_tp_extdR;
-  TBranch *b_tL1_pt;
-  TBranch *b_tL1_eta;
-  TBranch *b_tL1_phi;
-  TBranch *b_tSA_pt;
-  TBranch *b_tSA_eta;
-  TBranch *b_tSA_phi;
   TBranch *b_pL1_pt;
   TBranch *b_pL1_eta;
   TBranch *b_pL1_phi;
@@ -179,35 +148,18 @@ private:
   TBranch *b_pSA_phi;
   TBranch *b_pSA_dR;
   TBranch *b_pSA_sAddress;
-  TBranch *b_pSA_phims;
-  TBranch *b_pSA_phibe;
   TBranch *b_pSA_roieta;
   TBranch *b_pSA_roiphi;
   TBranch *b_pSA_pass;
-  /*
-  TBranch *b_pSA_pttgc;
-  TBranch *b_pSA_ptalpha;
-  TBranch *b_pSA_ptbeta;
-  */
   TBranch *b_pSA_superpointZ_BI;
   TBranch *b_pSA_superpointZ_BM;
   TBranch *b_pSA_superpointZ_BO;
   TBranch *b_pSA_superpointZ_BME;
-  TBranch *b_pSA_superpointZ_EI;
-  TBranch *b_pSA_superpointZ_EM;
-  TBranch *b_pSA_superpointZ_EO;
-  TBranch *b_pSA_superpointZ_EE;
-  TBranch *b_pSA_superpointZ_CSC;
   TBranch *b_pSA_superpointZ_BEE;
   TBranch *b_pSA_superpointR_BI;
   TBranch *b_pSA_superpointR_BM;
   TBranch *b_pSA_superpointR_BO;
   TBranch *b_pSA_superpointR_BME;
-  TBranch *b_pSA_superpointR_EI;
-  TBranch *b_pSA_superpointR_EM;
-  TBranch *b_pSA_superpointR_EO;
-  TBranch *b_pSA_superpointR_EE;
-  TBranch *b_pSA_superpointR_CSC;
   TBranch *b_pSA_superpointR_BEE;
   TBranch *b_pSA_superpointSlope_BI;
   TBranch *b_pSA_superpointSlope_BM;
@@ -221,12 +173,6 @@ private:
   TH2F *m_h_PtvsBarrelAlpha;
   TH1D *m_h_BarrelBeta;
   TH2F *m_h_PtvsBarrelBeta;
-  TH1D *m_h_DeltaThetaBI;
-  TH1D *m_h_DeltaThetaBM;
-  //TH1D *m_h_LargePhi;
-  //TH1D *m_h_SmallPhi;
-  //For LUT
-  //TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
 
 public:
   PtNewMethod(TTree *tree,std::string name,Int_t proc){
@@ -258,12 +204,6 @@ public:
     m_poff_z0 = 0;
     m_tp_dR = 0;
     m_tp_extdR = 0;
-    m_tL1_pt = 0;
-    m_tL1_eta = 0;
-    m_tL1_phi = 0;
-    m_tSA_pt = 0;
-    m_tSA_eta = 0;
-    m_tSA_phi = 0;
     m_mes_name = 0;
     m_pL1_pt = 0;
     m_pL1_eta = 0;
@@ -277,35 +217,18 @@ public:
     m_pSA_dR = 0;
     m_pSA_pass = 0;
     m_pSA_sAddress = 0;
-    m_pSA_phims = 0;
-    m_pSA_phibe = 0;
     m_pSA_roieta = 0;
     m_pSA_roiphi = 0;
-    /*
-    m_pSA_pttgc = 0;
-    m_pSA_ptalpha = 0;
-    m_pSA_ptbeta = 0;
-    */
     m_pSA_superpointZ_BI = 0;
     m_pSA_superpointZ_BM = 0;
     m_pSA_superpointZ_BO = 0;
     m_pSA_superpointZ_BME = 0;
-    m_pSA_superpointZ_EI = 0;
-    m_pSA_superpointZ_EM = 0;
-    m_pSA_superpointZ_EO = 0;
-    m_pSA_superpointZ_EE = 0;
-    m_pSA_superpointZ_CSC = 0;
     m_pSA_superpointZ_BEE = 0;
-    m_pSA_superpointZ_BME = 0;
     m_pSA_superpointR_BI = 0;
     m_pSA_superpointR_BM = 0;
     m_pSA_superpointR_BO = 0;
-    m_pSA_superpointR_EI = 0;
-    m_pSA_superpointR_EM = 0;
-    m_pSA_superpointR_EO = 0;
-    m_pSA_superpointR_EE = 0;
-    m_pSA_superpointR_CSC = 0;
     m_pSA_superpointR_BEE = 0;
+    m_pSA_superpointR_BME = 0;
     m_pSA_superpointSlope_BI = 0;
     m_pSA_superpointSlope_BM = 0;
     m_pEFTAG_pass = 0;
@@ -348,12 +271,6 @@ public:
     tChain->SetBranchAddress("probe_segment_sector",m_probe_segment_sector,&b_probe_segment_sector);
     tChain->SetBranchAddress("tp_dR",&m_tp_dR,&b_tp_dR);
     tChain->SetBranchAddress("tp_extdR",&m_tp_extdR,&b_tp_extdR);
-    tChain->SetBranchAddress("tag_L1_pt",&m_tL1_pt,&b_tL1_pt);
-    tChain->SetBranchAddress("tag_L1_eta",&m_tL1_eta,&b_tL1_eta);
-    tChain->SetBranchAddress("tag_L1_phi",&m_tL1_phi,&b_tL1_phi);
-    tChain->SetBranchAddress("tag_SA_pt",&m_tSA_pt,&b_tSA_pt);
-    tChain->SetBranchAddress("tag_SA_eta",&m_tSA_eta,&b_tSA_eta);
-    tChain->SetBranchAddress("tag_SA_phi",&m_tSA_phi,&b_tSA_phi);
     tChain->SetBranchAddress("probe_mesL1_pt",&m_pL1_pt,&b_pL1_pt);
     tChain->SetBranchAddress("probe_mesL1_eta",&m_pL1_eta,&b_pL1_eta);
     tChain->SetBranchAddress("probe_mesL1_phi",&m_pL1_phi,&b_pL1_phi);
@@ -366,34 +283,17 @@ public:
     tChain->SetBranchAddress("probe_mesSA_pass",&m_pSA_pass,&b_pSA_pass);
     tChain->SetBranchAddress("probe_mesSA_dR",&m_pSA_dR,&b_pSA_dR);
     tChain->SetBranchAddress("probe_mesSA_sAddress",&m_pSA_sAddress,&b_pSA_sAddress);
-    /*
-    tChain->SetBranchAddress("probe_mesSA_tgcpt",&m_pSA_pttgc,&b_pSA_pttgc);
-    tChain->SetBranchAddress("probe_mesSA_ptEndcapAlpha",&m_pSA_ptalpha,&b_pSA_ptalpha);
-    tChain->SetBranchAddress("probe_mesSA_ptEndcapBeta",&m_pSA_ptbeta,&b_pSA_ptbeta);
-    */
-    tChain->SetBranchAddress("probe_mesSA_phims",&m_pSA_phims,&b_pSA_phims);
-    tChain->SetBranchAddress("probe_mesSA_phibe",&m_pSA_phibe,&b_pSA_phibe);
     tChain->SetBranchAddress("probe_mesSA_roiEta",&m_pSA_roieta,&b_pSA_roieta);
     tChain->SetBranchAddress("probe_mesSA_roiPhi",&m_pSA_roiphi,&b_pSA_roiphi);
     tChain->SetBranchAddress("probe_mesSA_superPointZ_BI",&m_pSA_superpointZ_BI,&b_pSA_superpointZ_BI);
     tChain->SetBranchAddress("probe_mesSA_superPointZ_BM",&m_pSA_superpointZ_BM,&b_pSA_superpointZ_BM);
     tChain->SetBranchAddress("probe_mesSA_superPointZ_BO",&m_pSA_superpointZ_BO,&b_pSA_superpointZ_BO);
     tChain->SetBranchAddress("probe_mesSA_superPointZ_BME",&m_pSA_superpointZ_BME,&b_pSA_superpointZ_BME);
-    tChain->SetBranchAddress("probe_mesSA_superPointZ_EI",&m_pSA_superpointZ_EI,&b_pSA_superpointZ_EI);
-    tChain->SetBranchAddress("probe_mesSA_superPointZ_EM",&m_pSA_superpointZ_EM,&b_pSA_superpointZ_EM);
-    tChain->SetBranchAddress("probe_mesSA_superPointZ_EO",&m_pSA_superpointZ_EO,&b_pSA_superpointZ_EO);
-    tChain->SetBranchAddress("probe_mesSA_superPointZ_EE",&m_pSA_superpointZ_EE,&b_pSA_superpointZ_EE);
-    tChain->SetBranchAddress("probe_mesSA_superPointZ_CSC",&m_pSA_superpointZ_CSC,&b_pSA_superpointZ_CSC);
     tChain->SetBranchAddress("probe_mesSA_superPointZ_BEE",&m_pSA_superpointZ_BEE,&b_pSA_superpointZ_BEE);
     tChain->SetBranchAddress("probe_mesSA_superPointR_BI",&m_pSA_superpointR_BI,&b_pSA_superpointR_BI);
     tChain->SetBranchAddress("probe_mesSA_superPointR_BM",&m_pSA_superpointR_BM,&b_pSA_superpointR_BM);
     tChain->SetBranchAddress("probe_mesSA_superPointR_BO",&m_pSA_superpointR_BO,&b_pSA_superpointR_BO);
     tChain->SetBranchAddress("probe_mesSA_superPointR_BME",&m_pSA_superpointR_BME,&b_pSA_superpointR_BME);
-    tChain->SetBranchAddress("probe_mesSA_superPointR_EI",&m_pSA_superpointR_EI,&b_pSA_superpointR_EI);
-    tChain->SetBranchAddress("probe_mesSA_superPointR_EM",&m_pSA_superpointR_EM,&b_pSA_superpointR_EM);
-    tChain->SetBranchAddress("probe_mesSA_superPointR_EO",&m_pSA_superpointR_EO,&b_pSA_superpointR_EO);
-    tChain->SetBranchAddress("probe_mesSA_superPointR_EE",&m_pSA_superpointR_EE,&b_pSA_superpointR_EE);
-    tChain->SetBranchAddress("probe_mesSA_superPointR_CSC",&m_pSA_superpointR_CSC,&b_pSA_superpointR_CSC);
     tChain->SetBranchAddress("probe_mesSA_superPointR_BEE",&m_pSA_superpointR_BEE,&b_pSA_superpointR_BEE);
     tChain->SetBranchAddress("probe_mesSA_superPointSlope_BI",&m_pSA_superpointSlope_BI,&b_pSA_superpointSlope_BI);
     tChain->SetBranchAddress("probe_mesSA_superPointSlope_BM",&m_pSA_superpointSlope_BM,&b_pSA_superpointSlope_BM);
@@ -405,21 +305,6 @@ public:
     m_h_PtvsBarrelAlpha = new TH2F("h_PtvsBarrelAlpha","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
     m_h_BarrelBeta = new TH1D("h_BarrelBeta",";barrel #beta;Entries",120,-0.6,0.6);
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
-    m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    //m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",200,-1.0,1.0);
-    //m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
-    //For LUT
-    for(Int_t station = 0; station < 4;++station){//Large,Small,LargeSpecial,SmallSpecial
-      for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < 30;++eta){
-          for(Int_t phi = 0; phi < 30;++phi){
-            //m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
-          }
-        }
-      }
-    }
-  }
 
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
@@ -430,10 +315,6 @@ public:
     delete  m_h_PtvsBarrelAlpha;
     delete  m_h_BarrelBeta;
     delete  m_h_PtvsBarrelBeta;
-    delete  m_h_DeltaThetaBI;
-    delete  m_h_DeltaThetaBM;
-    delete  m_h_LargePhi;
-    delete  m_h_SmallPhi;
   }
 
 };

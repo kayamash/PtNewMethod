@@ -1,5 +1,5 @@
 #!/bin/bash
-branch="master"
+branch="dev_kayamash"
 file1="run.cpp"
 file2="PtNewMethod.cpp"
 file3="PtNewMethod.chh"

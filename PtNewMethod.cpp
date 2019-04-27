@@ -42,7 +42,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 	}
 }
 
-void PtNewMethod::Loop(Int_t ev){
+void PtNewMethod::Loop(const Int_t ev){
 	cout<<ev<<endl;
 	tChain->GetEntry(ev);
 	cout<<ev<<endl;
@@ -58,34 +58,17 @@ void PtNewMethod::Loop(Int_t ev){
 	Double_t pSA_dR = 1;
 	Int_t pSA_pass = 0;
 	Double_t pSA_sAddress = -1;
-	Double_t pSA_phims = -99999;
-	Double_t pSA_phibe = -99999;
 	float pSA_roieta = -99999;
 	float pSA_roiphi = -99999;
-	/*
-	Double_t pSA_ptTGC = -99999;
-	Double_t pSA_ptalpha = -99999;
-	Double_t pSA_ptbeta = -99999;
-	*/
 	Double_t pSA_superpointZ_BI = 0;
 	Double_t pSA_superpointZ_BM = 0;
 	Double_t pSA_superpointZ_BO = 0;
 	Double_t pSA_superpointZ_BME = 0;
-	Double_t pSA_superpointZ_EI = 0;
-	Double_t pSA_superpointZ_EM = 0;
-	Double_t pSA_superpointZ_EO = 0;
-	Double_t pSA_superpointZ_EE = 0;
-	Double_t pSA_superpointZ_CSC = 0;
 	Double_t pSA_superpointZ_BEE = 0;
 	Double_t pSA_superpointR_BI = 0;
 	Double_t pSA_superpointR_BM = 0;
 	Double_t pSA_superpointR_BO = 0;
 	Double_t pSA_superpointR_BME = 0;
-	Double_t pSA_superpointR_EI = 0;
-	Double_t pSA_superpointR_EM = 0;
-	Double_t pSA_superpointR_EO = 0;
-	Double_t pSA_superpointR_EE = 0;
-	Double_t pSA_superpointR_CSC = 0;
 	Double_t pSA_superpointR_BEE = 0;
 	Double_t pSA_superpointSlope_BI = 0;
 	Double_t pSA_superpointSlope_BM = 0;
@@ -103,59 +86,23 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_dR = m_pSA_dR->at(method);
 			pEFTAG_pass = m_pEFTAG_pass->at(method);
 			pSA_sAddress = m_pSA_sAddress->at(method);
-			pSA_phims = m_pSA_phims->at(method);
-			pSA_phibe = m_pSA_phibe->at(method);
 			pSA_roieta = m_pSA_roieta->at(method);
 			pSA_roiphi = m_pSA_roiphi->at(method);
-			/*
-			pSA_ptTGC = m_pSA_pttgc->at(method);
-			pSA_ptalpha = m_pSA_ptalpha->at(method);
-			pSA_ptbeta = m_pSA_ptbeta->at(method);
-			*/
 			pSA_superpointZ_BI = m_pSA_superpointZ_BI->at(method);
 			pSA_superpointZ_BM = m_pSA_superpointZ_BM->at(method);
 			pSA_superpointZ_BO = m_pSA_superpointZ_BO->at(method);
 			pSA_superpointZ_BME = m_pSA_superpointZ_BME->at(method);
-			pSA_superpointZ_EI = m_pSA_superpointZ_EI->at(method);
-			pSA_superpointZ_EM = m_pSA_superpointZ_EM->at(method);
-			pSA_superpointZ_EO = m_pSA_superpointZ_EO->at(method);
-			pSA_superpointZ_EE = m_pSA_superpointZ_EE->at(method);
-			pSA_superpointZ_CSC = m_pSA_superpointZ_CSC->at(method);
 			pSA_superpointZ_BEE = m_pSA_superpointZ_BEE->at(method);
 			pSA_superpointR_BI = m_pSA_superpointR_BI->at(method);
 			pSA_superpointR_BM = m_pSA_superpointR_BM->at(method);
 			pSA_superpointR_BO = m_pSA_superpointR_BO->at(method);
 			pSA_superpointR_BME = m_pSA_superpointR_BME->at(method);
-			pSA_superpointR_EI = m_pSA_superpointR_EI->at(method);
-			pSA_superpointR_EM = m_pSA_superpointR_EM->at(method);
-			pSA_superpointR_EO = m_pSA_superpointR_EO->at(method);
-			pSA_superpointR_EE = m_pSA_superpointR_EE->at(method);
-			pSA_superpointR_CSC = m_pSA_superpointR_CSC->at(method);
 			pSA_superpointR_BEE = m_pSA_superpointR_BEE->at(method);
 			pSA_superpointSlope_BI = m_pSA_superpointSlope_BI->at(method);
 			pSA_superpointSlope_BM = m_pSA_superpointSlope_BM->at(method);
 		}
 	}
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
-    //segment
-	Double_t segmentBISlope = 0;
-	Double_t segmentBMSlope = 0;
-	bool BIsegmentcheck = kFALSE;
-	bool BMsegmentcheck = kFALSE;
-	for(Int_t segmentNumber = 0; segmentNumber < 10; ++segmentNumber){
-		Double_t tmp_segmentR = sqrt(m_probe_segment_x[segmentNumber]*m_probe_segment_x[segmentNumber] + m_probe_segment_y[segmentNumber]*m_probe_segment_y[segmentNumber]);
-		Double_t tmp_segmentPR = sqrt(m_probe_segment_px[segmentNumber]*m_probe_segment_px[segmentNumber] + m_probe_segment_py[segmentNumber]*m_probe_segment_py[segmentNumber]);
-		if(tmp_segmentR > 4000 && tmp_segmentR < 6500 && BIsegmentcheck == kFALSE){
-			BIsegmentcheck = kTRUE;
-			segmentBISlope = tmp_segmentPR/m_probe_segment_pz[segmentNumber];
-		}
-		if(tmp_segmentR > 6000 && tmp_segmentR < 9000 && BMsegmentcheck == kFALSE){
-			BMsegmentcheck = kTRUE;
-			segmentBMSlope = tmp_segmentPR/m_probe_segment_pz[segmentNumber];
-		}
-	}
-	if(BIsegmentcheck)m_h_DeltaThetaBI->Fill(atan(segmentBISlope) - atan(1.0/pSA_superpointSlope_BI) );
-	if(BMsegmentcheck)m_h_DeltaThetaBM->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
     //barrel alpha
 	if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
@@ -173,29 +120,6 @@ void PtNewMethod::Loop(Int_t ev){
     }
     //barrel beta end
 
-    //For LUT
-    /*
-    Double_t PhiIntegral = 0;
-    if(pSA_sAddress == 0 || pSA_sAddress == 1){
-    	if(pSA_phi < -2.5)PhiIntegral = pSA_phi + TMath::Pi();
-    	if(pSA_phi > -2.5 || pSA_phi < -1.0)PhiIntegral = pSA_phi + TMath::Pi()/2.;
-    	if(pSA_phi > -1.0 || pSA_phi < 0.24)PhiIntegral = pSA_phi;
-    	if(pSA_phi > -0.24 || pSA_phi < 1.03)PhiIntegral = pSA_phi - TMath::Pi()/4.;
-    	if(pSA_phi > 1.03 || pSA_phi < 1.80)PhiIntegral = pSA_phi - TMath::Pi()/2.;
-    	if(pSA_phi > 1.80 || pSA_phi < 2.60)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
-    	if(pSA_phi > 2.60)PhiIntegral = pSA_phi - TMath::Pi();
-    	m_h_LargePhi->Fill(PhiIntegral);
-    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){
-    	if(pSA_phi < -2.0)PhiIntegral = pSA_phi + TMath::Pi();
-    	if(pSA_phi > -2.0 || pSA_phi < 0.)PhiIntegral = pSA_phi + TMath::Pi()/4.;
-    	if(pSA_phi > 0. || pSA_phi < 0.8)PhiIntegral = pSA_phi;
-    	if(pSA_phi > 0.8 || pSA_phi < 1.55)PhiIntegral = pSA_phi - TMath::Pi()/4.;
-    	if(pSA_phi > 1.55 || pSA_phi < 2.40)PhiIntegral = pSA_phi - TMath::Pi()/2.;
-    	if(pSA_phi > 2.40)PhiIntegral = pSA_phi - 3*TMath::Pi()/4.;
-    	m_h_SmallPhi->Fill(PhiIntegral);
-    }
-    */
-
 }
 
 void PtNewMethod::Finalize(TFile *tf1,std::string filename){
@@ -204,9 +128,5 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_PtvsBarrelAlpha->Write();
 	m_h_BarrelBeta->Write();
 	m_h_PtvsBarrelBeta->Write();
-	m_h_DeltaThetaBI->Write();
-	m_h_DeltaThetaBM->Write();
-	//m_h_LargePhi->Write();
-	//m_h_SmallPhi->Write();
 	cout<<"finish!!"<<endl;
 }
