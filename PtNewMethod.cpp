@@ -42,7 +42,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 	}
 }
 
-void PtNewMethod::Loop(const Int_t ev){
+void PtNewMethod::Loop(Int_t ev){
 	cout<<ev<<endl;
 	tChain->GetEntry(ev);
 	cout<<ev<<endl;
