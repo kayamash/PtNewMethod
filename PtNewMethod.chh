@@ -35,8 +35,8 @@ private:
   //for tree
   TTree *tChain;
     Float_t m_aipc;
-  long int m_eNumber;
-  long int m_rNumber;
+  unsigned long long int m_eNumber;
+  int m_rNumber;
   Double_t m_toff_pt;
   Double_t m_toff_eta;
   Double_t m_toff_exteta;
