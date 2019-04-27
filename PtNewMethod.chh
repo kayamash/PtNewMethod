@@ -343,6 +343,7 @@ public:
     m_proc = proc;
 
       //active only need branch 
+    /*
     tChain->SetBranchStatus("*",0);
     tChain->SetBranchStatus("EventNumber",1);
     tChain->SetBranchStatus("RunNumber",1);
@@ -430,6 +431,7 @@ public:
     tChain->SetBranchStatus("probe_mesSA_superPointSlope_BM",1);
     tChain->SetBranchStatus("sumReqdREF",1);
     tChain->SetBranchStatus("probe_mesEFTAG_pass",1);
+    */
 
       //setting each branch address
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
