@@ -21,7 +21,6 @@ void run(){
   std::string str;
   while(getline(ifs,str)){
   	chain->Add(str.c_str());
-  	//cout<<str<<endl;
   }
 
   if(!chain)cout<<"tree failed!"<<endl;

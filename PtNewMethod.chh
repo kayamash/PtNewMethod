@@ -247,8 +247,8 @@ private:
   TH2F *m_h_PtvsBarrelBeta;
   TH1D *m_h_DeltaThetaBI;
   TH1D *m_h_DeltaThetaBM;
-  //TH1D *m_h_LargePhi;
-  //TH1D *m_h_SmallPhi;
+  TH1D *m_h_LargePhi;
+  TH1D *m_h_SmallPhi;
   //For LUT
   //TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
 
@@ -343,8 +343,7 @@ public:
     m_proc = proc;
 
       //active only need branch 
-    /*
-    tChain->SetBranchStatus("*",0);
+        tChain->SetBranchStatus("*",0);
     tChain->SetBranchStatus("EventNumber",1);
     tChain->SetBranchStatus("RunNumber",1);
     tChain->SetBranchStatus("mes_name",1);
@@ -375,9 +374,6 @@ public:
     tChain->SetBranchStatus("probe_segment_x",1);
     tChain->SetBranchStatus("probe_segment_y",1);
     tChain->SetBranchStatus("probe_segment_z",1);
-    tChain->SetBranchStatus("probe_segment_px",1);
-    tChain->SetBranchStatus("probe_segment_py",1);
-    tChain->SetBranchStatus("probe_segment_pz",1);
     tChain->SetBranchStatus("probe_segment_nPrecisionHits",1);
     tChain->SetBranchStatus("probe_segment_sector",1);
     tChain->SetBranchStatus("tp_dR",1);
@@ -388,6 +384,12 @@ public:
     tChain->SetBranchStatus("tag_SA_pt",1);
     tChain->SetBranchStatus("tag_SA_eta",1);
     tChain->SetBranchStatus("tag_SA_phi",1);
+    tChain->SetBranchStatus("tag_CB_pt",1);
+    tChain->SetBranchStatus("tag_CB_eta",1);
+    tChain->SetBranchStatus("tag_CB_phi",1);
+    tChain->SetBranchStatus("tag_EF_pt",1);
+    tChain->SetBranchStatus("tag_EF_eta",1);
+    tChain->SetBranchStatus("tag_EF_phi",1);
     tChain->SetBranchStatus("probe_mesL1_pt",1);
     tChain->SetBranchStatus("probe_mesL1_eta",1);
     tChain->SetBranchStatus("probe_mesL1_phi",1);
@@ -404,6 +406,14 @@ public:
     tChain->SetBranchStatus("probe_mesSA_phibe",1);
     tChain->SetBranchStatus("probe_mesSA_roiEta",1);
     tChain->SetBranchStatus("probe_mesSA_roiPhi",1);
+    tChain->SetBranchStatus("probe_mesSA_rpcHitX",1);
+    tChain->SetBranchStatus("probe_mesSA_rpcHitY",1);
+    tChain->SetBranchStatus("probe_mesSA_rpcHitZ",1);
+    tChain->SetBranchStatus("probe_mesSA_rpcHitR",1);
+    tChain->SetBranchStatus("probe_mesSA_mdtHitZ",1);
+    tChain->SetBranchStatus("probe_mesSA_mdtHitR",1);
+    tChain->SetBranchStatus("probe_mesSA_mdtHitPhi",1);
+    tChain->SetBranchStatus("probe_mesSA_mdtHitChamber",1);
     tChain->SetBranchStatus("probe_mesSA_tgcpt",1);
     tChain->SetBranchStatus("probe_mesSA_ptEndcapAlpha",1);
     tChain->SetBranchStatus("probe_mesSA_ptEndcapBeta",1);
@@ -429,9 +439,18 @@ public:
     tChain->SetBranchStatus("probe_mesSA_superPointR_BEE",1);
     tChain->SetBranchStatus("probe_mesSA_superPointSlope_BI",1);
     tChain->SetBranchStatus("probe_mesSA_superPointSlope_BM",1);
+    tChain->SetBranchStatus("probe_mesCB_pt",1);
+    tChain->SetBranchStatus("probe_mesCB_eta",1);
+    tChain->SetBranchStatus("probe_mesCB_phi",1);  
+    tChain->SetBranchStatus("probe_mesCB_pass",1);
+    tChain->SetBranchStatus("probe_mesCB_dR",1);
+    tChain->SetBranchStatus("probe_mesEF_pt",1);
+    tChain->SetBranchStatus("probe_mesEF_eta",1);
+    tChain->SetBranchStatus("probe_mesEF_phi",1);
+    tChain->SetBranchStatus("probe_mesEF_pass",1);
+    tChain->SetBranchStatus("probe_mesEF_dR",1);
     tChain->SetBranchStatus("sumReqdREF",1);
     tChain->SetBranchStatus("probe_mesEFTAG_pass",1);
-    */
 
       //setting each branch address
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
@@ -528,8 +547,8 @@ public:
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
     m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    //m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",200,-1.0,1.0);
-    //m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
+    m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",200,-1.0,1.0);
+    m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
     //For LUT
     for(Int_t station = 0; station < 4;++station){//Large,Small,LargeSpecial,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
