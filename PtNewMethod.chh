@@ -219,8 +219,8 @@ private:
   TH2F *m_h_PtvsBarrelBeta;
   TH1D *m_h_DeltaThetaBI;
   TH1D *m_h_DeltaThetaBM;
-  //TH1D *m_h_LargePhi;
-  //TH1D *m_h_SmallPhi;
+  TH1D *m_h_LargePhi;
+  TH1D *m_h_SmallPhi;
   //For LUT
   //TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
 
@@ -400,8 +400,8 @@ public:
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
     m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    //m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",200,-1.0,1.0);
-    //m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
+    m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",200,-1.0,1.0);
+    m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
     //For LUT
     for(Int_t station = 0; station < 4;++station){//Large,Small,LargeSpecial,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
@@ -425,8 +425,8 @@ public:
     delete  m_h_PtvsBarrelBeta;
     delete  m_h_DeltaThetaBI;
     delete  m_h_DeltaThetaBM;
-    //delete  m_h_LargePhi;
-    //delete  m_h_SmallPhi;
+    delete  m_h_LargePhi;
+    delete  m_h_SmallPhi;
   }
 
 };
