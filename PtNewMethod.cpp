@@ -46,6 +46,7 @@ void PtNewMethod::Loop(Int_t ev){
 	cout<<ev<<endl;
 	tChain->GetEntry(ev);
 	cout<<ev<<endl;
+	/*
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pL1_pt = -99999;
@@ -168,6 +169,7 @@ void PtNewMethod::Loop(Int_t ev){
         m_h_PtvsBarrelBeta->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     }
     //barrel beta end
+    */
 
     //For LUT
     /*
