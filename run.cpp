@@ -24,11 +24,11 @@ void run(){
   	cout<<str<<endl;
   }
 
-  if(!tr1)cout<<"tree failed!"<<endl;
+  if(!chain1)cout<<"tree failed!"<<endl;
   cout<<"chain->Add() end"<<endl;
-  PtNewMethod m(chain,trigger,proc);
-  const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
-  cout<<"Total Events are "<<chain->GetEntries()<<endl;
+  PtNewMethod m(chain1,trigger,proc);
+  const Int_t events = (EventFullScan) ? (chain1->GetEntries()) : (1000000);
+  cout<<"Total Events are "<<chain1->GetEntries()<<endl;
   for(Int_t i = 0;i < events;i++){
     m.Loop(i);
   }
@@ -37,6 +37,6 @@ void run(){
   cout<<"finalize"<<endl;
   m.Finalize(output_file,LUTname);
   delete  output_file;
-  delete chain;
+  delete chain1;
 }
 
