@@ -277,6 +277,7 @@ public:
     m_pSA_phibe = 0;
     m_pSA_roieta = 0;
     m_pSA_roiphi = 0;
+    m_pSA_pttgc = 0;
     m_pSA_ptalpha = 0;
     m_pSA_ptbeta = 0;
     m_pSA_superpointZ_BI = 0;
@@ -305,7 +306,6 @@ public:
     m_sumReqdREF = 0;
 
       //setting each branch address
-    /*
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
     tChain->SetBranchAddress("RunNumber",&m_rNumber,&b_rNumber);
     tChain->SetBranchAddress("mes_name",&m_mes_name,&b_mes_name);
@@ -354,7 +354,6 @@ public:
     tChain->SetBranchAddress("probe_mesL1_pass",&m_pL1_pass,&b_pL1_pass);
     tChain->SetBranchAddress("probe_mesL1_dR",&m_pL1_dR,&b_pL1_dR);
     tChain->SetBranchAddress("sumReqdRL1",&m_sumReqdRL1,&b_sumReqdRL1);
-    */
     tChain->SetBranchAddress("probe_mesSA_pt",&m_pSA_pt,&b_pSA_pt);
     tChain->SetBranchAddress("probe_mesSA_eta",&m_pSA_eta,&b_pSA_eta);
     tChain->SetBranchAddress("probe_mesSA_phi",&m_pSA_phi,&b_pSA_phi);
