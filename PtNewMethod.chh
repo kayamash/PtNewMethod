@@ -93,11 +93,9 @@ private:
   std::vector<float> *m_pSA_roieta;
   std::vector<float> *m_pSA_roiphi;
   std::vector<Int_t> *m_pSA_pass;
-  /*
   std::vector<Double_t> *m_pSA_pttgc;
   std::vector<Double_t> *m_pSA_ptalpha;
   std::vector<Double_t> *m_pSA_ptbeta;
-  */
   std::vector<Double_t> *m_pSA_superpointZ_BI;
   std::vector<Double_t> *m_pSA_superpointZ_BM;
   std::vector<Double_t> *m_pSA_superpointZ_BO;
@@ -184,11 +182,9 @@ private:
   TBranch *b_pSA_roieta;
   TBranch *b_pSA_roiphi;
   TBranch *b_pSA_pass;
-  /*
   TBranch *b_pSA_pttgc;
   TBranch *b_pSA_ptalpha;
   TBranch *b_pSA_ptbeta;
-  */
   TBranch *b_pSA_superpointZ_BI;
   TBranch *b_pSA_superpointZ_BM;
   TBranch *b_pSA_superpointZ_BO;
@@ -281,11 +277,9 @@ public:
     m_pSA_phibe = 0;
     m_pSA_roieta = 0;
     m_pSA_roiphi = 0;
-    /*
     m_pSA_pttgc = 0;
     m_pSA_ptalpha = 0;
     m_pSA_ptbeta = 0;
-    */
     m_pSA_superpointZ_BI = 0;
     m_pSA_superpointZ_BM = 0;
     m_pSA_superpointZ_BO = 0;
@@ -366,11 +360,9 @@ public:
     tChain->SetBranchAddress("probe_mesSA_pass",&m_pSA_pass,&b_pSA_pass);
     tChain->SetBranchAddress("probe_mesSA_dR",&m_pSA_dR,&b_pSA_dR);
     tChain->SetBranchAddress("probe_mesSA_sAddress",&m_pSA_sAddress,&b_pSA_sAddress);
-    /*
     tChain->SetBranchAddress("probe_mesSA_tgcpt",&m_pSA_pttgc,&b_pSA_pttgc);
     tChain->SetBranchAddress("probe_mesSA_ptEndcapAlpha",&m_pSA_ptalpha,&b_pSA_ptalpha);
     tChain->SetBranchAddress("probe_mesSA_ptEndcapBeta",&m_pSA_ptbeta,&b_pSA_ptbeta);
-    */
     tChain->SetBranchAddress("probe_mesSA_phims",&m_pSA_phims,&b_pSA_phims);
     tChain->SetBranchAddress("probe_mesSA_phibe",&m_pSA_phibe,&b_pSA_phibe);
     tChain->SetBranchAddress("probe_mesSA_roiEta",&m_pSA_roieta,&b_pSA_roieta);
