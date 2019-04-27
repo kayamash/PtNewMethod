@@ -47,8 +47,6 @@ void PtNewMethod::Loop(Int_t ev){
 	tChain->GetEntry(ev);
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
-	Double_t pextCB_dR = 1; 
-	Double_t pextEF_dR = 1; 
 	Double_t pL1_pt = -99999;
 	Double_t pL1_eta = 0;
 	Double_t pL1_phi = 0;
@@ -114,16 +112,6 @@ void PtNewMethod::Loop(Int_t ev){
 			pSA_phibe = m_pSA_phibe->at(method);
 			pSA_roieta = m_pSA_roieta->at(method);
 			pSA_roiphi = m_pSA_roiphi->at(method);
-            	/*
-            	pSA_rpcX = &(m_pSA_rpcX->at(method));
-            	pSA_rpcY = &(m_pSA_rpcY->at(method));
-            	pSA_rpcZ = &(m_pSA_rpcZ->at(method));
-            	pSA_rpcR = &(m_pSA_rpcR->at(method));
-            	pSA_mdtZ = &(m_pSA_mdtZ->at(method));
-            	pSA_mdtR = &(m_pSA_mdtR->at(method));
-            	pSA_mdtPhi = &(m_pSA_mdtPhi->at(method));
-            	pSA_mdthitChamber = &(m_pSA_mdthitChamber->at(method));
-            	*/
 			pSA_ptTGC = m_pSA_pttgc->at(method);
 			pSA_ptalpha = m_pSA_ptalpha->at(method);
 			pSA_ptbeta = m_pSA_ptbeta->at(method);

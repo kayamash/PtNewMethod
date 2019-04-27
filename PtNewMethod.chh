@@ -34,9 +34,6 @@ class PtNewMethod
 private:
   //for tree
   TTree *tChain;
-  Float_t m_aipc;
-  unsigned long long int m_eNumber;
-  int m_rNumber;
   Double_t m_toff_pt;
   Double_t m_toff_eta;
   Double_t m_toff_exteta;
@@ -94,16 +91,6 @@ private:
   std::vector<float> *m_pSA_roieta;
   std::vector<float> *m_pSA_roiphi;
   std::vector<Int_t> *m_pSA_pass;
-  /*
-  std::vector<vector<float>> *m_pSA_rpcX;
-  std::vector<vector<float>> *m_pSA_rpcY;
-  std::vector<vector<float>> *m_pSA_rpcZ;
-  std::vector<vector<float>> *m_pSA_rpcR;
-  std::vector<vector<float>> *m_pSA_mdtZ;
-  std::vector<vector<float>> *m_pSA_mdtR;
-  std::vector<vector<float>> *m_pSA_mdtPhi;
-  std::vector<vector<Int_t>> *m_pSA_mdthitChamber;
-  */
   std::vector<Double_t> *m_pSA_pttgc;
   std::vector<Double_t> *m_pSA_ptalpha;
   std::vector<Double_t> *m_pSA_ptbeta;
@@ -136,10 +123,7 @@ private:
   Int_t m_proc;
 
   //branch
-  TBranch *b_eNumber;
-  TBranch *b_rNumber;
   TBranch *b_mes_name;
-  TBranch *b_aipc;
   TBranch *b_tag_proc;
   TBranch *b_tag_pt;
   TBranch *b_tag_eta;
@@ -179,12 +163,6 @@ private:
   TBranch *b_tSA_pt;
   TBranch *b_tSA_eta;
   TBranch *b_tSA_phi;
-  TBranch *b_tCB_pt;
-  TBranch *b_tCB_eta;
-  TBranch *b_tCB_phi;
-  TBranch *b_tEF_pt;
-  TBranch *b_tEF_eta;
-  TBranch *b_tEF_phi;
   TBranch *b_pL1_pt;
   TBranch *b_pL1_eta;
   TBranch *b_pL1_phi;
@@ -201,16 +179,6 @@ private:
   TBranch *b_pSA_roieta;
   TBranch *b_pSA_roiphi;
   TBranch *b_pSA_pass;
-  /*
-  TBranch *b_pSA_rpcX;
-  TBranch *b_pSA_rpcY;
-  TBranch *b_pSA_rpcZ;
-  TBranch *b_pSA_rpcR;
-  TBranch *b_pSA_mdtZ;
-  TBranch *b_pSA_mdtR;
-  TBranch *b_pSA_mdtPhi;
-  TBranch *b_pSA_mdthitChamber;
-  */
   TBranch *b_pSA_pttgc;
   TBranch *b_pSA_ptalpha;
   TBranch *b_pSA_ptbeta;
@@ -255,8 +223,6 @@ private:
 public:
   PtNewMethod(TTree *tree,std::string name,Int_t proc){
     tChain = tree;
-    m_eNumber = 0;
-    m_rNumber = 0;
     m_tag_proc = 0;
     m_toff_pt = 0;
     m_toff_eta = 0;
@@ -299,16 +265,6 @@ public:
     m_pSA_dR = 0;
     m_pSA_pass = 0;
     m_pSA_sAddress = 0;
-    /*
-    m_pSA_rpcX = 0;
-    m_pSA_rpcY = 0;
-    m_pSA_rpcZ = 0;
-    m_pSA_rpcR = 0;
-    m_pSA_mdtZ = 0;
-    m_pSA_mdtR = 0;
-    m_pSA_mdtPhi = 0;
-    m_pSA_mdthitChamber = 0;
-    */
     m_pSA_phims = 0;
     m_pSA_phibe = 0;
     m_pSA_roieta = 0;
@@ -343,10 +299,7 @@ public:
     m_proc = proc;
 
       //setting each branch address
-    tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
-    tChain->SetBranchAddress("RunNumber",&m_rNumber,&b_rNumber);
     tChain->SetBranchAddress("mes_name",&m_mes_name,&b_mes_name);
-    tChain->SetBranchAddress("AverageInteractionsPerCrossing",&m_aipc,&b_aipc);
     tChain->SetBranchAddress("tag_proc",&m_tag_proc,&b_tag_proc);
     tChain->SetBranchAddress("tag_pt",&m_toff_pt,&b_tag_pt);
     tChain->SetBranchAddress("tag_eta",&m_toff_eta,&b_tag_eta);
@@ -462,7 +415,6 @@ public:
     delete  m_h_PtvsBarrelBeta;
     delete  m_h_DeltaThetaBI;
     delete  m_h_DeltaThetaBM;
-    delete  tChain;
   }
 
 };
