@@ -301,6 +301,16 @@ public:
     m_pSA_superpointR_BEE = 0;
     m_pSA_superpointSlope_BI = 0;
     m_pSA_superpointSlope_BM = 0;
+    m_probe_segment_etaIndex = 0;
+    m_probe_segment_chamberIndex = 0;
+    m_probe_segment_x = 0;
+    m_probe_segment_y = 0;
+    m_probe_segment_z = 0;
+    m_probe_segment_px = 0;
+    m_probe_segment_py = 0;
+    m_probe_segment_pz = 0;
+    m_probe_segment_nPrecisionHits = 0;
+    m_probe_segment_sector = 0;
     m_pEFTAG_pass = 0;
     m_sumReqdREF = 0;
 

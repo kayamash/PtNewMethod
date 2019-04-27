@@ -61,14 +61,6 @@ void PtNewMethod::Loop(Int_t ev){
 	Double_t pSA_phibe = -99999;
 	float pSA_roieta = -99999;
 	float pSA_roiphi = -99999;
-	vector<float> *pSA_rpcX = 0;
-	vector<float> *pSA_rpcY = 0;
-	vector<float> *pSA_rpcZ = 0;
-	vector<float> *pSA_rpcR = 0;
-	vector<float> *pSA_mdtZ = 0;
-	vector<float> *pSA_mdtR = 0;
-	vector<float> *pSA_mdtPhi = 0;
-	vector<Int_t> *pSA_mdthitChamber = 0;
 	Double_t pSA_ptTGC = -99999;
 	Double_t pSA_ptalpha = -99999;
 	Double_t pSA_ptbeta = -99999;
