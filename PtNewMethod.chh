@@ -342,8 +342,6 @@ public:
     m_method_name = name;
     m_proc = proc;
 
-      //active only need branch 
-
       //setting each branch address
     tChain->SetBranchAddress("EventNumber",&m_eNumber,&b_eNumber);
     tChain->SetBranchAddress("RunNumber",&m_rNumber,&b_rNumber);
@@ -464,6 +462,7 @@ public:
     delete  m_h_PtvsBarrelBeta;
     delete  m_h_DeltaThetaBI;
     delete  m_h_DeltaThetaBM;
+    delete  tChain;
   }
 
 };
