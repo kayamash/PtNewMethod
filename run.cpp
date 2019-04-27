@@ -19,7 +19,10 @@ void run(){
   TChain *chain = new TChain("t_tap");
   std::ifstream ifs(inputfilelist.c_str());
   std::string str;
-  while(getline(ifs,str))chain->Add(str.c_str());
+  while(getline(ifs,str)){
+  	chain->Add(str.c_str());
+  	cout<<str<<endl;
+  }
   cout<<"chain->Add() end"<<endl;
   PtNewMethod m(chain,trigger,proc);
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
