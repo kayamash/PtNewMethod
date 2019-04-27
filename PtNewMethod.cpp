@@ -213,7 +213,7 @@ void PtNewMethod::Loop(Int_t ev){
     */
 
 
-    
+
 }
 
 void PtNewMethod::Finalize(TFile *tf1,std::string filename){
@@ -224,7 +224,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_PtvsBarrelBeta->Write();
 	m_h_DeltaThetaBI->Write();
 	m_h_DeltaThetaBM->Write();
-	m_h_LargePhi->Write();
-	m_h_SmallPhi->Write();
+	//m_h_LargePhi->Write();
+	//m_h_SmallPhi->Write();
 	cout<<"finish!!"<<endl;
 }
