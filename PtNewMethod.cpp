@@ -151,7 +151,7 @@ void PtNewMethod::Loop(Int_t ev){
         }
     }
 
-    if(!CutAll(pEFTAG_pass,pL1_pass))return;
+    if( !CutAll(pEFTAG_pass,pL1_pass) )return;
     //segment
     Double_t segmentBISlope = 0;
     Double_t segmentBMSlope = 0;
@@ -173,7 +173,7 @@ void PtNewMethod::Loop(Int_t ev){
     if(BMsegmentcheck)m_h_DeltaThetaBI->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
     //barrel alpha
-    if(pSA_superpointR_BM != 0 && EtaDistribution(pSA_roieta) == 0){
+    if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
         Double_t barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
         m_h_BarrelAlpha->Fill(barrelalpha);
         m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
@@ -181,7 +181,7 @@ void PtNewMethod::Loop(Int_t ev){
     //barrel alpha end
 
     //barrel beta
-    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && EtaDistribution(pSA_roieta) == 0){
+    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
         Double_t barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
         m_h_BarrelBeta->Fill(barrelbeta);
         m_h_PtvsBarrelBeta->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);

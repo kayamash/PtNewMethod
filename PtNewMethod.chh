@@ -549,7 +549,7 @@ public:
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #delta #theta BM;offline - SA #delta #theta;Events",2000,-1.,1.);
   }
 
-  void CutAll(Int_t Tagpass,Int_t L1pass);
+  bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
   void Loop(Int_t ev);
   void Finalize(TFile *tf1,std::string filename);
