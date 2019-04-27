@@ -250,7 +250,7 @@ private:
   TH1D *m_h_LargePhi;
   TH1D *m_h_SmallPhi;
   //For LUT
-  TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
+  //TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
 
 public:
   PtNewMethod(TTree *tree,std::string name,Int_t proc){
@@ -533,7 +533,7 @@ public:
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
-            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
+            //m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
           }
         }
       }
