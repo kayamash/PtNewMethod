@@ -166,6 +166,13 @@ void PtNewMethod::Loop(Int_t ev){
     }
     //barrel beta end
 
+    //Line BI
+    if(pSA_superpointR_BI != 0){
+    	Double_t deltaThetaLineBI = atan(pSA_superpointR_BI/pSA_superpointZ_BI) - atan(1.0/pSA_superpointSlope_BI);
+    	m_h_DeltaThetaLineBI->Fill(deltaThetaLineBI);
+    	m_h_PtvsDeltaThetaLineBI->Fill(std::fabs(m_poff_pt*0.001),deltaThetaLineBI);
+    }
+
     //For LUT
     Double_t PhiIntegral = 0;
     if(pSA_sAddress == 0 || pSA_sAddress == 1){
@@ -199,5 +206,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_DeltaThetaBM->Write();
 	m_h_LargePhi->Write();
 	m_h_SmallPhi->Write();
+	m_h_DeltaThetaLineBI->Write();
+	m_h_PtvsDeltaThetaLineBI->Write();
 	cout<<"finish!!"<<endl;
 }
