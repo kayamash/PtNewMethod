@@ -53,7 +53,7 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
 	if(charge == 1.)par[1] = 0;//positive
 	if(charge == -1.)par[1] = 1;//negative
 	
-	Int_t tmp_eta = (static_cast)<int>(std::fabs(eta)*15/1.05);
+	Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*15/1.05);
     par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
 
 	Double_t tmp_phi = phi + TMath::Pi();
@@ -61,10 +61,10 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
     	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
     	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
     	tmp_phi -= TMath::Pi()/8.;
-    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
+    }else if(address == 2 || address == 3){//Small
     	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
     }
-    par[3] = (static_cast)<int>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
+    par[3] = static_cast<Int_t>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
     return kFALSE;
