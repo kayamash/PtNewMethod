@@ -224,7 +224,8 @@ private:
   TH1D *m_h_DeltaThetaLineBI;
   TH2F *m_h_PtvsDeltaThetaLineBI;
   //For LUT
-  //TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[4][2][30][30];
+  TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[5][2][30][30];
+  TH2F *m_h_PtvsBarrelBeta_StationChargeEtaPhi[5][2][30][30];
 
 public:
   PtNewMethod(TTree *tree,std::string name,Int_t proc){
@@ -402,16 +403,17 @@ public:
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
     m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",150,0.,1.5);
-    m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0,1.0);
+    m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",100,0.,1.);
+    m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0.,1.);
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",2000,-1.,1.);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,2000,-1.,1.);
     //For LUT
-    for(Int_t station = 0; station < 4;++station){//Large,Small,LargeSpecial,SmallSpecial
+    for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
-            //m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
+            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
+            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
           }
         }
       }
@@ -420,6 +422,7 @@ public:
 
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
+  bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t &(par)[4]);
   void Loop(Int_t ev);
   void Finalize(TFile *tf1,std::string filename);
   ~PtNewMethod(){
@@ -433,6 +436,16 @@ public:
     delete  m_h_SmallPhi;
     delete  m_h_DeltaThetaLineBI;
     delete  m_h_PtvsDeltaThetaLineBI;
+    for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+      for(Int_t charge = 0; charge < 2;++charge){//positive,negative
+        for(Int_t eta = 0; eta < 30;++eta){
+          for(Int_t phi = 0; phi < 30;++phi){
+            delete  m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
+            delete  m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi];
+          }
+        }
+      }
+    }
   }
 
 };

@@ -42,6 +42,34 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 	}
 }
 
+bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t &(par)[4]){
+	for(Int_t i = 0; i < 4; ++i)par[i] = -1;
+	if(address == 0.)par[0] = 0;//Large
+	if(address == 1. && phi < -1.5)par[0] = 1;//LS sector 11
+	if(address == 1. && phi > -1.5)par[0] = 2;//LS sector 15
+	if(address == 2.)par[0] = 3;//Small
+	if(address == 3.)par[0] = 4;//SS
+
+	if(charge == 1.)par[1] = 0;//positive
+	if(charge == -1.)par[1] = 1;//negative
+	
+	Int_t tmp_eta = (static_cast)<Int_t>(std::fabs(eta)*15/1.05);
+    par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
+
+	Double_t tmp_phi = phi + TMath::Pi();
+    if(address == 0 || address == 1){//Large
+    	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
+    	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
+    	tmp_phi -= TMath::Pi()/8.;
+    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
+    	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
+    }
+    par[3] = (static_cast)<Int_t>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
+
+    if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
+    return kFALSE;
+}
+
 void PtNewMethod::Loop(Int_t ev){
 	tChain->GetEntry(ev);
 	Double_t pextL1_dR = 1; 
@@ -175,15 +203,24 @@ void PtNewMethod::Loop(Int_t ev){
     }
 
     //For LUT
-    Double_t PhiIntegral = pSA_phi + TMath::Pi();
-    if(pSA_sAddress == 0 || pSA_sAddress == 1){
-    	while(PhiIntegral > 3*TMath::Pi()/8.)PhiIntegral -= TMath::Pi()/4.;
-    	while(PhiIntegral < TMath::Pi()/8.)PhiIntegral += TMath::Pi()/4.;
-    	m_h_LargePhi->Fill(PhiIntegral);
-    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){
-    	while(PhiIntegral > TMath::Pi()/4.)PhiIntegral -= TMath::Pi()/4.;
-    	m_h_SmallPhi->Fill(PhiIntegral);
+    Double_t tmp_phi = pSA_phi + TMath::Pi();
+    if(pSA_sAddress == 0 || pSA_sAddress == 1){//Large
+    	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
+    	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
+    	tmp_phi -= TMath::Pi()/8.;
+    	m_h_LargePhi->Fill(tmp_phi);
+    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
+    	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
+    	m_h_SmallPhi->Fill(tmp_phi);
     }
+
+    Int_t LUTparameter[4];
+    for(Int_t i = 0; i < 4; ++i){
+    	LUTparameter[i] = 0;
+    }
+    bool LUTcheck = getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
+    if(LUTcheck)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    if(LUTcheck)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
 
 }
 
@@ -199,5 +236,15 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_SmallPhi->Write();
 	m_h_DeltaThetaLineBI->Write();
 	m_h_PtvsDeltaThetaLineBI->Write();
+	for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+      for(Int_t charge = 0; charge < 2;++charge){//positive,negative
+        for(Int_t eta = 0; eta < 30;++eta){
+          for(Int_t phi = 0; phi < 30;++phi){
+            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
+            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
+          }
+        }
+      }
+    }
 	cout<<"finish!!"<<endl;
 }
