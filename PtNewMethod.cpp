@@ -53,7 +53,7 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
 	if(charge == 1.)par[1] = 0;//positive
 	if(charge == -1.)par[1] = 1;//negative
 	
-	Int_t tmp_eta = (static_cast)<Int_t>(std::fabs(eta)*15/1.05);
+	Int_t tmp_eta = (static_cast)<int>(std::fabs(eta)*15/1.05);
     par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
 
 	Double_t tmp_phi = phi + TMath::Pi();
@@ -64,7 +64,7 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
     }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
     	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
     }
-    par[3] = (static_cast)<Int_t>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
+    par[3] = (static_cast)<int>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
     return kFALSE;
@@ -159,6 +159,8 @@ void PtNewMethod::Loop(Int_t ev){
 		}
 	}
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
+	Double_t barrelalpha = -99999;
+	Double_t barrelbeta = -99999;
     //segment
 	Double_t segmentBISlope = 0;
 	Double_t segmentBMSlope = 0;
@@ -181,7 +183,7 @@ void PtNewMethod::Loop(Int_t ev){
 
     //barrel alpha
 	if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
-        Double_t barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
+        barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
         m_h_BarrelAlpha->Fill(barrelalpha);
         m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     }
@@ -189,7 +191,7 @@ void PtNewMethod::Loop(Int_t ev){
 
     //barrel beta
     if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
-        Double_t barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
+        barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
         m_h_BarrelBeta->Fill(barrelbeta);
         m_h_PtvsBarrelBeta->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     }
@@ -219,8 +221,8 @@ void PtNewMethod::Loop(Int_t ev){
     	LUTparameter[i] = 0;
     }
     bool LUTcheck = getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
-    if(LUTcheck)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
-    if(LUTcheck)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
 
 }
 
