@@ -223,6 +223,46 @@ void PtNewMethod::Loop(Int_t ev){
     bool LUTcheck = getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    if(LUTcheck && barrelalpha != -99999){
+    	switch(static_cast<Int_t>(pSA_sAddress)){
+    		case 0:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelAlpha_LargePositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelAlpha_LargeNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		break;
+    		case 1:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelAlpha_LSPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelAlpha_LSNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		break;
+    		case 2:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelAlpha_SmallPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelAlpha_SmallNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		break;
+    		case 3:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelAlpha_SSPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelAlpha_SSNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    		break;
+    	}
+    }
+    if(LUTcheck && barrelbeta != -99999){
+    	switch(static_cast<Int_t>(pSA_sAddress)){
+    		case 0:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelBeta_LargePositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelBeta_LargeNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		break;
+    		case 1:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelBeta_LSPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelBeta_LSNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		break;
+    		case 2:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelBeta_SmallPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelBeta_SmallNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		break;
+    		case 3:
+    		if(m_poff_charge == 1.)m_h_PtvsBarrelBeta_SSPositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		if(m_poff_charge == -1.)m_h_PtvsBarrelBeta_SSNegative->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    		break;
+    	}
+    }
 
 }
 
@@ -248,5 +288,21 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
         }
       }
     }
+    m_h_PtvsBarrelAlpha_LargePositive->Write();
+    m_h_PtvsBarrelAlpha_LargeNegative->Write();
+    m_h_PtvsBarrelAlpha_SmallPositive->Write();
+    m_h_PtvsBarrelAlpha_SmallNegative->Write();
+    m_h_PtvsBarrelAlpha_LSPositive->Write();
+    m_h_PtvsBarrelAlpha_LSNegative->Write();
+    m_h_PtvsBarrelAlpha_SSPositive->Write();
+    m_h_PtvsBarrelAlpha_SSNegative->Write();
+    m_h_PtvsBarrelBeta_LargePositive->Write();
+    m_h_PtvsBarrelBeta_LargeNegative->Write();
+    m_h_PtvsBarrelBeta_SmallPositive->Write();
+    m_h_PtvsBarrelBeta_SmallNegative->Write();
+    m_h_PtvsBarrelBeta_LSPositive->Write();
+    m_h_PtvsBarrelBeta_LSNegative->Write();
+    m_h_PtvsBarrelBeta_SSPositive->Write();
+    m_h_PtvsBarrelBeta_SSNegative->Write();
 	cout<<"finish!!"<<endl;
 }
