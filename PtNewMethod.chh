@@ -422,7 +422,7 @@ public:
 
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
-  bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t &(par)[4]);
+  bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4]);
   void Loop(Int_t ev);
   void Finalize(TFile *tf1,std::string filename);
   ~PtNewMethod(){
