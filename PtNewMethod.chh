@@ -401,8 +401,8 @@ public:
     m_h_PtvsBarrelAlpha = new TH2F("h_PtvsBarrelAlpha","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
     m_h_BarrelBeta = new TH1D("h_BarrelBeta",";barrel #beta;Entries",120,-0.6,0.6);
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
-    m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #delta #theta;Events",200,-0.1,0.1);
-    m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #delta #theta;Events",200,-0.1,0.1);
+    m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #Delta #theta;Events",200,-0.1,0.1);
+    m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",100,0.,1.);
     m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0.,1.);
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",2000,-1.,1.);
