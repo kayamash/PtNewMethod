@@ -264,6 +264,7 @@ void PtNewMethod::Loop(Int_t ev){
 }
 
 void PtNewMethod::Finalize(TFile *tf1,std::string filename){
+
 	tf1->cd();
 	m_h_BarrelAlpha->Write();
 	m_h_PtvsBarrelAlpha->Write();
@@ -301,6 +302,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
         		for(Int_t phi = 0; phi < 30;++phi){
         			m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
+        			//Write_LUT();
         			m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
         		}

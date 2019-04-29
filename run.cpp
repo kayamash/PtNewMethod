@@ -7,7 +7,8 @@
 
 const string inputfilelist = "/home/kayamash/efflist/20190416data18_physics_Main_Ztap.list";
 const string outputfilename = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/LUT/data18_physics_Main_ZtapMU4.root";
-const string LUTname = "/gpfs/fs7001/kayamash/Mywork/efficiencyloopoutput/LUT/kayamashNewMethod.LUT";
+const string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/efficiencyloopoutput/LUT/kayamashNewMethodAlpha.LUT";
+const string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/efficiencyloopoutput/LUT/kayamashNewMethodBeta.LUT";
 const string trigger = "mu4";//JPsimumu
 //const string trigger = "mu26ivm";//Zmumu
 const Int_t proc = 1;//Jpsitap = 1,Ztap = 3
