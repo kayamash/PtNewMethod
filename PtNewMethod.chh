@@ -481,8 +481,6 @@ public:
             cout<<station<<"   "<<charge<<"   "<<eta<<"   "<<phi<<endl;
             delete  m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
             delete  m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi];
-            delete  m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
-            delete  m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi];
           }
         }
       }
