@@ -36,7 +36,7 @@ void run(){
 
   TFile *output_file = new TFile(outputfilename.c_str(),"RECREATE");
   cout<<"finalize"<<endl;
-  m.Finalize(output_file,LUTname);
+  m.Finalize(output_file,LUTnameAlpha);
   delete  output_file;
   delete chain;
 }
