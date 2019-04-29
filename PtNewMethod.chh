@@ -414,9 +414,9 @@ public:
 
     //histgram
     m_h_BarrelAlpha = new TH1D("h_BarrelAlpha",";barrel #alpha;Entries",120,-0.6,0.6);
-    m_h_PtvsBarrelAlpha = new TH2F("h_PtvsBarrelAlpha","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
+    m_h_PtvsBarrelAlpha = new TH2F("h_PtvsBarrelAlpha","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
     m_h_BarrelBeta = new TH1D("h_BarrelBeta",";barrel #beta;Entries",120,-0.6,0.6);
-    m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",100,0.,1.0,200,-1.0,1.0);
+    m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",30,0.,0.3,100,-0.5,0.5);
     m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",100,0.,1.);
@@ -428,28 +428,28 @@ public:
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
-            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
-            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",100,-1.,1.,100,-1.,1.);
+            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",100,-1.,1.,100,-0.5,0.5);
+            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",100,-1.,1.,100,-0.5,0.5);
           }
         }
       }
     }
-    m_h_PtvsBarrelAlpha_LargePositive = new TH2F("h_PtvsBarrelAlpha_LargePositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_LargeNegative = new TH2F("h_PtvsBarrelAlpha_LargeNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_SmallPositive = new TH2F("h_PtvsBarrelAlpha_SmallPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_SmallNegative = new TH2F("h_PtvsBarrelAlpha_SmallNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_LSPositive = new TH2F("h_PtvsBarrelAlpha_LSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_LSNegative = new TH2F("h_PtvsBarrelAlpha_LSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_SSPositive = new TH2F("h_PtvsBarrelAlpha_SSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelAlpha_SSNegative = new TH2F("h_PtvsBarrelAlpha_SSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_LargePositive = new TH2F("h_PtvsBarrelBeta_LargePositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_LargeNegative = new TH2F("h_PtvsBarrelBeta_LargeNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_SmallPositive = new TH2F("h_PtvsBarrelBeta_SmallPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_SmallNegative = new TH2F("h_PtvsBarrelBeta_SmallNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_LSPositive = new TH2F("h_PtvsBarrelBeta_LSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_LSNegative = new TH2F("h_PtvsBarrelBeta_LSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_SSPositive = new TH2F("h_PtvsBarrelBeta_SSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
-    m_h_PtvsBarrelBeta_SSNegative = new TH2F("h_PtvsBarrelBeta_SSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",100,0.,1.0,200,-1.0,1.0);
+    m_h_PtvsBarrelAlpha_LargePositive = new TH2F("h_PtvsBarrelAlpha_LargePositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_LargeNegative = new TH2F("h_PtvsBarrelAlpha_LargeNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_SmallPositive = new TH2F("h_PtvsBarrelAlpha_SmallPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_SmallNegative = new TH2F("h_PtvsBarrelAlpha_SmallNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_LSPositive = new TH2F("h_PtvsBarrelAlpha_LSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_LSNegative = new TH2F("h_PtvsBarrelAlpha_LSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_SSPositive = new TH2F("h_PtvsBarrelAlpha_SSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelAlpha_SSNegative = new TH2F("h_PtvsBarrelAlpha_SSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_LargePositive = new TH2F("h_PtvsBarrelBeta_LargePositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_LargeNegative = new TH2F("h_PtvsBarrelBeta_LargeNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_SmallPositive = new TH2F("h_PtvsBarrelBeta_SmallPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_SmallNegative = new TH2F("h_PtvsBarrelBeta_SmallNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_LSPositive = new TH2F("h_PtvsBarrelBeta_LSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_LSNegative = new TH2F("h_PtvsBarrelBeta_LSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_SSPositive = new TH2F("h_PtvsBarrelBeta_SSPositive","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
+    m_h_PtvsBarrelBeta_SSNegative = new TH2F("h_PtvsBarrelBeta_SSNegative","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
   }
 
   bool CutAll(Int_t Tagpass,Int_t L1pass);

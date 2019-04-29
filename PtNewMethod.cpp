@@ -182,19 +182,11 @@ void PtNewMethod::Loop(Int_t ev){
 	if(BMsegmentcheck)m_h_DeltaThetaBM->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
     //barrel alpha
-	if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
-        barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(pSA_superpointSlope_BM);//Reciprocal number?
-        m_h_BarrelAlpha->Fill(barrelalpha);
-        m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
-    }
+	if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE)barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(pSA_superpointSlope_BM);//Reciprocal number?
     //barrel alpha end
 
     //barrel beta
-    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE){
-        barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
-        m_h_BarrelBeta->Fill(barrelbeta);
-        m_h_PtvsBarrelBeta->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
-    }
+    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE)barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
     //barrel beta end
 
     //Line BI
@@ -224,6 +216,8 @@ void PtNewMethod::Loop(Int_t ev){
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
+    	m_h_BarrelAlpha->Fill(barrelalpha);
+        m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     	switch(static_cast<Int_t>(pSA_sAddress)){
     		case 0:
     		if(m_poff_charge == 1.)m_h_PtvsBarrelAlpha_LargePositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
@@ -244,6 +238,8 @@ void PtNewMethod::Loop(Int_t ev){
     	}
     }
     if(LUTcheck && barrelbeta != -99999){
+    	m_h_BarrelBeta->Fill(barrelbeta);
+        m_h_PtvsBarrelBeta->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     	switch(static_cast<Int_t>(pSA_sAddress)){
     		case 0:
     		if(m_poff_charge == 1.)m_h_PtvsBarrelBeta_LargePositive->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
@@ -278,16 +274,37 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
 	m_h_SmallPhi->Write();
 	m_h_DeltaThetaLineBI->Write();
 	m_h_PtvsDeltaThetaLineBI->Write();
-	for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
-      for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < 30;++eta){
-          for(Int_t phi = 0; phi < 30;++phi){
-            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
-            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
-          }
-        }
-      }
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
+	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+	for(Int_t charge = 0; charge < 2;++charge){//positive,negative
+		for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+			if(charge == 0 && station == 0)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
+			if(charge == 0 && (station == 1 || station == 2))tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
+			if(charge == 0 && station == 3)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
+			if(charge == 0 && station == 4)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
+			if(charge == 1 && (station == 1 || station == 2))tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
+			if(charge == 1 && station == 0)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
+			if(charge == 1 && station == 3)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
+			if(charge == 1 && station == 4)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+        	for(Int_t eta = 0; eta < 30;++eta){
+        		for(Int_t phi = 0; phi < 30;++phi){
+        			m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
+        			m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
+        		}
+        	}
+        	tf1->cd();
+    	}
     }
+    tf1->cd();
     m_h_PtvsBarrelAlpha_LargePositive->Write();
     m_h_PtvsBarrelAlpha_LargeNegative->Write();
     m_h_PtvsBarrelAlpha_SmallPositive->Write();
