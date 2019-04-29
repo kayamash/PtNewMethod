@@ -478,6 +478,7 @@ public:
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
+            cout<<station<<"   "<<charge<<"   "<<eta<<"   "<<phi<<endl;
             delete  m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
             delete  m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi];
             delete  m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
