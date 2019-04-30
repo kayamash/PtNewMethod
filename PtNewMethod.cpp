@@ -71,7 +71,7 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
     return kFALSE;
 }
 
-bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename){
+/*bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename){
 	Double_t fOrder;
 	Double_t sOrder;
 	ofstream ofs;
@@ -80,12 +80,12 @@ bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t
 	TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
 	fitProf->SetParameter(0,);
 	fitProf->SetParameter(1,);
-}
+}*/
 
 void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	tChain->GetEntry(ev);
 	m_method_name = name;
-	m_proc = proc
+	m_proc = proc;
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pL1_pt = -99999;
@@ -320,10 +320,10 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
         		for(Int_t phi = 0; phi < 30;++phi){
         			m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
-        			WriteLUT(m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameA);
+        			//WriteLUT(m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameA);
         			m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
-        			WriteLUT(m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameB);
+        			//WriteLUT(m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameB);
         		}
         	}
         	tf1->cd();
