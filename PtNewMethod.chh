@@ -248,10 +248,8 @@ private:
   TProfile *m_prof_PtvsBarrelBeta_StationChargeEtaPhi[5][2][30][30];
 
 public:
-  PtNewMethod(TTree *tree,std::string name,Int_t proc){
+  PtNewMethod(TTree *tree){
     tChain = tree;
-    m_method_name = name;
-    m_proc = proc;
     m_eNumber = 0;
     m_rNumber = 0;
     m_tag_proc = 0;
@@ -461,8 +459,9 @@ public:
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
   bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4]);
-  void Loop(Int_t ev);
-  void Finalize(TFile *tf1,std::string filename);
+  bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename);
+  void Loop(Int_t ev,std::string name,Int_t proc);
+  void Finalize(TFile *tf1,std::string filenameA,std::string filenameB);
   ~PtNewMethod(){
     delete  m_h_BarrelAlpha;
     delete  m_h_PtvsBarrelAlpha;

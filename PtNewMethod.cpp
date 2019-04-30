@@ -27,8 +27,8 @@
 #include <TProfile.h>
 
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
-	if(Tagpass > -1 && m_tag_proc == m_proc){
-    //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
+	//if(Tagpass > -1 && m_tag_proc == m_proc){
+    if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
 		return kTRUE;
 	}else{
 		return kFALSE;
@@ -71,8 +71,21 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
     return kFALSE;
 }
 
-void PtNewMethod::Loop(Int_t ev){
+bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename){
+	Double_t fOrder;
+	Double_t sOrder;
+	ofstream ofs;
+	ofs.open(filename.c_str());
+	prof->Draw();
+	TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
+	fitProf->SetParameter(0,);
+	fitProf->SetParameter(1,);
+}
+
+void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	tChain->GetEntry(ev);
+	m_method_name = name;
+	m_proc = proc
 	Double_t pextL1_dR = 1; 
 	Double_t pextSA_dR = 1; 
 	Double_t pL1_pt = -99999;
@@ -263,7 +276,12 @@ void PtNewMethod::Loop(Int_t ev){
 
 }
 
-void PtNewMethod::Finalize(TFile *tf1,std::string filename){
+void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filenameB){
+	ofstream ofs;
+	ofs.open(filenameA.c_str());
+	ofs.close();
+	ofs.open(filenameB.c_str());
+	ofs.close();
 
 	tf1->cd();
 	m_h_BarrelAlpha->Write();
@@ -302,9 +320,10 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
         		for(Int_t phi = 0; phi < 30;++phi){
         			m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
-        			//Write_LUT();
+        			WriteLUT(m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameA);
         			m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
+        			WriteLUT(m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameB);
         		}
         	}
         	tf1->cd();
@@ -312,7 +331,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filename){
     }
     tf1->cd();
 
-    //Prfile
+    //Profile, only use for save profile to other directry,unnecessary?
     tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi");
 	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive");
 	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative");
