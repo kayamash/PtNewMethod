@@ -220,13 +220,11 @@ private:
   TH2F *m_h_PtvsBarrelBeta;
   TH1D *m_h_DeltaThetaBI;
   TH1D *m_h_DeltaThetaBM;
-  TH1D *m_h_LargePhi;
-  TH1D *m_h_SmallPhi;
   TH1D *m_h_DeltaThetaLineBI;
   TH2F *m_h_PtvsDeltaThetaLineBI;
   //For LUT
-  TH2F *m_h_PtvsBarrelAlpha_StationChargeEtaPhi[5][2][30][30];
-  TH2F *m_h_PtvsBarrelBeta_StationChargeEtaPhi[5][2][30][30];
+  TH2F *m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];
+  TH2F *m_h_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];
   TH2F *m_h_PtvsBarrelAlpha_LargePositive;
   TH2F *m_h_PtvsBarrelAlpha_LargeNegative;
   TH2F *m_h_PtvsBarrelAlpha_SmallPositive;
@@ -244,8 +242,8 @@ private:
   TH2F *m_h_PtvsBarrelBeta_SSPositive;
   TH2F *m_h_PtvsBarrelBeta_SSNegative;
 
-  TProfile *m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[5][2][30][30];
-  TProfile *m_prof_PtvsBarrelBeta_StationChargeEtaPhi[5][2][30][30];
+  TProfile *m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];
+  TProfile *m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];
 
 public:
   PtNewMethod(TTree *tree){
@@ -421,19 +419,17 @@ public:
     m_h_PtvsBarrelBeta = new TH2F("h_PtvsBarrelBeta","1/p_{T} vs Barrel #beta;1/p_{T};barrel #beta",30,0.,0.3,100,-0.5,0.5);
     m_h_DeltaThetaBI = new TH1D("h_DeltaThetaBI","Slope #Delta#theta BI;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #Delta #theta;Events",200,-0.1,0.1);
-    m_h_LargePhi = new TH1D("h_LargePhi","Large #phi;#phi integral;Events",100,0.,1.);
-    m_h_SmallPhi = new TH1D("h_SmallPhi","Small #phi;#phi integral;Events",100,0.,1.);
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",100,-0.5,0.5);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,100,-0.5,0.5);
     //For LUT
-    for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+    for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
-            m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
-            m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
-            m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelAlpha%d%d%02d%02d",station,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),30,0.,0.3);
-            m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",station,charge,eta,phi),30,0.,0.3);
+            m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
+            m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
+            m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
+            m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
           }
         }
       }
@@ -469,16 +465,14 @@ public:
     delete  m_h_PtvsBarrelBeta;
     delete  m_h_DeltaThetaBI;
     delete  m_h_DeltaThetaBM;
-    delete  m_h_LargePhi;
-    delete  m_h_SmallPhi;
     delete  m_h_DeltaThetaLineBI;
     delete  m_h_PtvsDeltaThetaLineBI;
-    for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+    for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 30;++eta){
           for(Int_t phi = 0; phi < 30;++phi){
-            delete  m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi];
-            delete  m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi];
+            delete  m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi];
+            delete  m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi];
           }
         }
       }

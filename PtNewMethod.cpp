@@ -1,4 +1,5 @@
 #include "PtNewMethod.chh"
+#include "kayamashForLUT.cpp"
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
@@ -43,6 +44,7 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 	}
 }
 
+/*
 bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4]){
 	for(Int_t i = 0; i < 4; ++i)par[i] = -1;
 	if(address == 0.)par[0] = 0;//Large
@@ -70,6 +72,7 @@ bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
     return kFALSE;
 }
+*/
 
 /*bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename){
 	Double_t fOrder;
@@ -216,19 +219,18 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
     	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
     	tmp_phi -= TMath::Pi()/8.;
-    	m_h_LargePhi->Fill(tmp_phi);
     }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
     	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
-    	m_h_SmallPhi->Fill(tmp_phi);
     }
 
     Int_t LUTparameter[4];
     for(Int_t i = 0; i < 4; ++i){
     	LUTparameter[i] = 0;
     }
-    bool LUTcheck = getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
-    if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
-    if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_StationChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
+    kayamashForLUT LUT;
+    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
+    if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
+    if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
     	m_h_BarrelAlpha->Fill(barrelalpha);
         m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
@@ -282,6 +284,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	ofs.close();
 	ofs.open(filenameB.c_str());
 	ofs.close();
+	kayamashForLUT LUT;
 
 	tf1->cd();
 	m_h_BarrelAlpha->Write();
@@ -290,40 +293,38 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	m_h_PtvsBarrelBeta->Write();
 	m_h_DeltaThetaBI->Write();
 	m_h_DeltaThetaBM->Write();
-	m_h_LargePhi->Write();
-	m_h_SmallPhi->Write();
 	m_h_DeltaThetaLineBI->Write();
 	m_h_PtvsDeltaThetaLineBI->Write();
 	//For LUT
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
-	tf1->mkdir("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Large");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/LargeSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Small");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/SmallSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Large");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
+	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
 	for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-		for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
-			if(charge == 0 && station == 0)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
-			if(charge == 0 && (station == 1 || station == 2))tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
-			if(charge == 0 && station == 3)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
-			if(charge == 0 && station == 4)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
-			if(charge == 1 && (station == 1 || station == 2))tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
-			if(charge == 1 && station == 0)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
-			if(charge == 1 && station == 3)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
-			if(charge == 1 && station == 4)tf1->cd("h_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+		for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+			if(charge == 0 && sector == 0)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Large");
+			if(charge == 0 && (sector == 1 || sector == 2))tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/LargeSpecial");
+			if(charge == 0 && sector == 3)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Small");
+			if(charge == 0 && sector == 4)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/SmallSpecial");
+			if(charge == 1 && (sector == 1 || sector == 2))tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Large");
+			if(charge == 1 && sector == 0)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
+			if(charge == 1 && sector == 3)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
+			if(charge == 1 && sector == 4)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
         	for(Int_t eta = 0; eta < 30;++eta){
         		for(Int_t phi = 0; phi < 30;++phi){
-        			m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
-        			m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
-        			//WriteLUT(m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameA);
-        			m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
-        			m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi] = m_h_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->ProfileX();
-        			//WriteLUT(m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi],station,charge,eta,phi,filenameB);
+        			m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
+        			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->ProfileX();
+        			LUT.WriteLUT(m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi],sector,charge,eta,phi,kTRUE,filenameA);
+        			m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
+        			m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi]->ProfileX();
+        			LUT.WriteLUT(m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi],sector,charge,eta,phi,kFALSE,filenameB);
         		}
         	}
         	tf1->cd();
@@ -332,31 +333,31 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     tf1->cd();
 
     //Profile, only use for save profile to other directry,unnecessary?
-    tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
-	tf1->mkdir("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+    tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Large");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/LargeSpecial");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Small");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/SmallSpecial");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Large");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
+	tf1->mkdir("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
 	for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-		for(Int_t station = 0; station < 5;++station){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
-			if(charge == 0 && station == 0)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Large");
-			if(charge == 0 && (station == 1 || station == 2))tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/LargeSpecial");
-			if(charge == 0 && station == 3)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/Small");
-			if(charge == 0 && station == 4)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/positive/SmallSpecial");
-			if(charge == 1 && (station == 1 || station == 2))tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Large");
-			if(charge == 1 && station == 0)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/LargeSpecial");
-			if(charge == 1 && station == 3)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/Small");
-			if(charge == 1 && station == 4)tf1->cd("Profile_PtvsBarrelAlpha_StationChargeEtaPhi/negative/SmallSpecial");
+		for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
+			if(charge == 0 && sector == 0)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Large");
+			if(charge == 0 && (sector == 1 || sector == 2))tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/LargeSpecial");
+			if(charge == 0 && sector == 3)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/Small");
+			if(charge == 0 && sector == 4)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/positive/SmallSpecial");
+			if(charge == 1 && sector == 0)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Large");
+			if(charge == 1 && (sector == 1 || sector == 2))tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
+			if(charge == 1 && sector == 3)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
+			if(charge == 1 && sector == 4)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
         	for(Int_t eta = 0; eta < 30;++eta){
         		for(Int_t phi = 0; phi < 30;++phi){
-        			m_prof_PtvsBarrelAlpha_StationChargeEtaPhi[station][charge][eta][phi]->Write();
-        			m_prof_PtvsBarrelBeta_StationChargeEtaPhi[station][charge][eta][phi]->Write();
+        			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
+        			m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         		}
         	}
         	tf1->cd();

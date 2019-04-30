@@ -6,9 +6,9 @@
 #include "PtNewMethod.cpp"
 
 const string inputfilelist = "/home/kayamash/efflist/20190416data18_physics_Main_Ztap.list";
-const string outputfilename = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/LUT/data18_physics_Main_JPZtap.root";
-const string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/efficiencyloopoutput/LUT/kayamashNewMethodAlpha.LUT";
-const string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/efficiencyloopoutput/LUT/kayamashNewMethodBeta.LUT";
+const string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/data18_physics_Main_JPZtap.root";
+const string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/kayamashNewMethodAlpha.LUT";
+const string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/kayamashNewMethodBeta.LUT";
 const string trigger1 = "mu4";//JPsimumu
 const string trigger2 = "mu26ivm";//Zmumu
 const Int_t proc1 = 1;//Jpsitap = 1,Ztap = 3
