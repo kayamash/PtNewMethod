@@ -58,7 +58,7 @@ bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool al
 	Double_t fOrder;
 	Double_t sOrder;
 	if(alpha){//alpha
-		if(charge == 1){
+		if(par2 == 1){//charge
 			switch(par1){//Sector
 				case 0:
 				fOrder = -0.0184048;
@@ -106,7 +106,7 @@ bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool al
 			}
 		}
 	}else{//beta
-		if(charge == 1){
+		if(par2 == 1){//charge
 			switch(par1){//Sector
 				case 0:
 				fOrder = -0.0225169;
@@ -159,13 +159,13 @@ bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool al
 	prof->Draw();
 	TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
 	fitProf->SetParameters(0,fOrder,sOrder);
-	fitProf->FixParLimits(0,0.,0.);
+	fitProf->SetParLimits(0,0.,0.);
 	prof->Fit(fitProf);
 	Double_t p0 = fitProf->GetParameter(1);
 	Double_t p1 = fitProf->GetParameter(2);
 	Double_t chi = fitProf->GetChisquare();
 
-	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<"   "<<p0<<"   "<<p1<<"   "<<chi<<std::endl;
+	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<chi<<std::endl;
 	ofs.close();
 	return kTRUE;
 }
