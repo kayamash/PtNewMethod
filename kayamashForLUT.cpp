@@ -61,47 +61,47 @@ bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool al
 		if(charge == 1){
 			switch(par1){//Sector
 				case 0:
-				fOrder = -0.0184048
-				sOrder = -3.62884
+				fOrder = -0.0184048;
+				sOrder = -3.62884;
 				break;
 				case 1:
-				fOrder = -0.201341
-				sOrder = -2.69654
+				fOrder = -0.201341;
+				sOrder = -2.69654;
 				break;
 				case 2:
-				fOrder = -0.118256
-				sOrder = -2.91538
+				fOrder = -0.118256;
+				sOrder = -2.91538;
 				break;
 				case 3:
-				fOrder = -0.373771
-				sOrder = -4.20018
+				fOrder = -0.373771;
+				sOrder = -4.20018;
 				break;
 				case 4:
-				fOrder = -0.276773
-				sOrder = -5.23416
+				fOrder = -0.276773;
+				sOrder = -5.23416;
 				break;
 			}
 		}else{
 			switch(par1){//Sector
 				case 0:
-				fOrder = 0.147342
-				sOrder = 2.77986
+				fOrder = 0.147342;
+				sOrder = 2.77986;
 				break;
 				case 1:
-				fOrder = -0.0414529
-				sOrder = 4.40735
+				fOrder = -0.0414529;
+				sOrder = 4.40735;
 				break;
 				case 2:
-				fOrder = 0.191687
-				sOrder = 2.6177
+				fOrder = 0.191687;
+				sOrder = 2.6177;
 				break;
 				case 3:
-				fOrder = 0.250872
-				sOrder = 3.74082
+				fOrder = 0.250872;
+				sOrder = 3.74082;
 				break;
 				case 4:
-				fOrder = 0.225341
-				sOrder = 3.82399
+				fOrder = 0.225341;
+				sOrder = 3.82399;
 				break;
 			}
 		}
@@ -109,47 +109,47 @@ bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool al
 		if(charge == 1){
 			switch(par1){//Sector
 				case 0:
-				fOrder = -0.0225169
-				sOrder = 4.08316
+				fOrder = -0.0225169;
+				sOrder = 4.08316;
 				break;
 				case 1:
-				fOrder = -0.0044969
-				sOrder = 1.75247
+				fOrder = -0.0044969;
+				sOrder = 1.75247;
 				break;
 				case 2:
-				fOrder = 0.0835498
-				sOrder = 1.01082
+				fOrder = 0.0835498;
+				sOrder = 1.01082;
 				break;
 				case 3:
-				fOrder = 0.207164
-				sOrder = 7.40479
+				fOrder = 0.207164;
+				sOrder = 7.40479;
 				break;
 				case 4:
-				fOrder = 0.275761
-				sOrder = 7.10336
+				fOrder = 0.275761;
+				sOrder = 7.10336;
 				break;
 			}
 		}else{
 			switch(par1){//Sector
 				case 0:
-				fOrder = -0.156158
-				sOrder = -2.28754
+				fOrder = -0.156158;
+				sOrder = -2.28754;
 				break;
 				case 1:
-				fOrder = 0.319591
-				sOrder = -4.28552
+				fOrder = 0.319591;
+				sOrder = -4.28552;
 				break;
 				case 2:
-				fOrder = 0.149876
-				sOrder = -2.47795
+				fOrder = 0.149876;
+				sOrder = -2.47795;
 				break;
 				case 3:
-				fOrder = -0.489921
-				sOrder = -3.20891
+				fOrder = -0.489921;
+				sOrder = -3.20891;
 				break;
 				case 4:
-				fOrder = -0.575507
-				sOrder = -2.90169
+				fOrder = -0.575507;
+				sOrder = -2.90169;
 				break;
 			}
 		}
