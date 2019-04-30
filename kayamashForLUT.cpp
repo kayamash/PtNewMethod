@@ -155,15 +155,22 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		}
 	}
 	ofstream ofs;
-	ofs.open(filename.c_str());
+	ofs.open(filename.c_str(),std::ios::app);
 	prof->Draw();
-	TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
-	fitProf->SetParameters(0,fOrder,sOrder);
-	fitProf->SetParLimits(0,0.,0.);
-	prof->Fit(fitProf);
-	Double_t p0 = fitProf->GetParameter(1);
-	Double_t p1 = fitProf->GetParameter(2);
-	Double_t chi = fitProf->GetChisquare();
+	Double_t p0 = 0;
+	Double_t p1 = 0;
+	Double_t chi = 0;
+	if(prof->GetEntries() != 0){
+		TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
+		fitProf->SetParameter(0,0.);
+		fitProf->SetParameter(1,fOrder);
+		fitProf->SetParameter(2,sOrder);
+		fitProf->FixParameter(0);
+		prof->Fit(fitProf,"I","",0.,0.3);
+		p0 = fitProf->GetParameter(1);
+		p1 = fitProf->GetParameter(2);
+		chi = fitProf->GetChisquare();
+	}
 
 	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<chi<<std::endl;
 	ofs.close();
