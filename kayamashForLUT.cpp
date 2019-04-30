@@ -159,8 +159,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	prof->Draw();
 	Double_t p0 = 0;
 	Double_t p1 = 0;
-	Double_t chi = 0;
-	Double_t Ndof = 0;
+	Double_t pValue = 0;
 	if(prof->GetEntries() != 0){
 		TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
 		fitProf->SetParameter(0,fOrder);
@@ -168,11 +167,12 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		prof->Fit(fitProf,"I","",0.,0.3);
 		p0 = fitProf->GetParameter(0);
 		p1 = fitProf->GetParameter(1);
-		chi = fitProf->GetChisquare();
-		Ndof = fitProf->GetNDF();
+		Double_t chi = fitProf->GetChisquare();
+		Double_t Ndof = fitProf->GetNDF();
+		pValue = TMath::Prob(chi, Ndof);
 	}
 
-	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<chi<<"   "<<Ndof<<std::endl;
+	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<pValue<<std::endl;
 	ofs.close();
 	return kTRUE;
 }
