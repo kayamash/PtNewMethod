@@ -121,7 +121,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 			}
 		}
 	}else{//beta
-		if(par2 == 1){//charge
+		if(par2 == 0){//charge
 			switch(par1){//Sector
 				case 0:
 				fOrder = -0.0225169;
