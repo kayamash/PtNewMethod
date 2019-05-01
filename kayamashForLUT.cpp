@@ -188,7 +188,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		pValue = TMath::Prob(chi, Ndof);
 	}
 
-	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<chi<<"   "<<Ndof<<"   "<<pValue<<std::endl;
+	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<"   "<<pValue<<std::endl;
 	ofs.close();
 	return kTRUE;
 }
