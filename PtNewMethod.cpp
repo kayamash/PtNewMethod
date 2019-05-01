@@ -44,47 +44,6 @@ bool PtNewMethod::BarrelDicision(Float_t eta){
 	}
 }
 
-/*
-bool PtNewMethod::getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4]){
-	for(Int_t i = 0; i < 4; ++i)par[i] = -1;
-	if(address == 0.)par[0] = 0;//Large
-	if(address == 1. && phi < -1.5)par[0] = 1;//LS sector 11
-	if(address == 1. && phi > -1.5)par[0] = 2;//LS sector 15
-	if(address == 2.)par[0] = 3;//Small
-	if(address == 3.)par[0] = 4;//SS
-
-	if(charge == 1.)par[1] = 0;//positive
-	if(charge == -1.)par[1] = 1;//negative
-	
-	Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*15/1.05);
-    par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
-
-	Double_t tmp_phi = phi + TMath::Pi();
-    if(address == 0 || address == 1){//Large
-    	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
-    	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
-    	tmp_phi -= TMath::Pi()/8.;
-    }else if(address == 2 || address == 3){//Small
-    	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
-    }
-    par[3] = static_cast<Int_t>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
-
-    if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
-    return kFALSE;
-}
-*/
-
-/*bool PtNewMethod::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename){
-	Double_t fOrder;
-	Double_t sOrder;
-	ofstream ofs;
-	ofs.open(filename.c_str());
-	prof->Draw();
-	TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
-	fitProf->SetParameter(0,);
-	fitProf->SetParameter(1,);
-}*/
-
 void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	tChain->GetEntry(ev);
 	m_method_name = name;

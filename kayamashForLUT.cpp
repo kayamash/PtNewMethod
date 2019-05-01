@@ -178,8 +178,21 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	ofs.close();
 	return kTRUE;
 }
-/*
-bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t par1,Double_t par2){
 
+bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t par1,Double_t par2){
+	ifstream ifs(lut.c_str());
+	bool check = kFALSE;
+	while(!ifs.eof()){
+		Int_t parameter[4] = {0,0,0,0};
+		Double_t parameter1 = 0;
+		Double_t parameter2 = 0;
+		ifs>>parameter[0]>>parameter[1]>>parameter[2]>>parameter[3]>>parameter1>>parameter2;
+		if(parameter[0] == par[0] && parameter[1] == par[1] &&parameter[2] == par[2] &&parameter[3] == par[3]){
+			par1 = parameter1;
+			par2 = parameter2;
+			check = kTRUE;
+		}
+	}
+	if(check)return kTRUE;
+	return kFALSE;
 }
-*/
