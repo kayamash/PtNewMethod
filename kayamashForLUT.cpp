@@ -36,9 +36,12 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
 
 	if(charge == 1.)par[1] = 0;//positive
 	if(charge == -1.)par[1] = 1;//negative
-	
+	/*
 	Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*15./1.05);
     par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15.);//Eta　divide to 30
+    */
+    Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*8./1.05);
+    par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 8.);//Eta　divide to 16
 
 	Double_t tmp_phi = phi;
 	Int_t tmp_par = -1;
@@ -51,7 +54,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     	if(-1.2 > phi && -2.0 < phi)tmp_phi += TMath::Pi()/2.;
     	if(-2.0 > phi && -2.8 < phi)tmp_phi += 3*TMath::Pi()/4.;
     	if(-2.8 > phi)tmp_phi += TMath::Pi();
-    	tmp_par = static_cast<Int_t>((tmp_phi+0.27)*30./0.54); //Phi divide to 30
+    	tmp_par = static_cast<Int_t>((tmp_phi+0.27)*15./0.54); //Phi divide to 15
     }else if(address == 2 || address == 3){//Small
     	if(0.8 < phi && 1.6 > phi)tmp_phi -= TMath::Pi()/4.;
     	if(1.6 < phi && 2.4 > phi)tmp_phi -= TMath::Pi()/2.;
@@ -60,7 +63,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     	if(-0.8 > phi && -1.6 < phi)tmp_phi += TMath::Pi()/2.;
     	if(-1.6 > phi && -2.4 < phi)tmp_phi += 3*TMath::Pi()/4.;
     	if(-2.4 > phi)tmp_phi += TMath::Pi();
-    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*30./0.56); //Phi divide to 30
+    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*15./0.56); //Phi divide to 15
     }
     if(tmp_par >= 0 && tmp_par <= 29)par[3] = tmp_par;
 
