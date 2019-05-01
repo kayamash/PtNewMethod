@@ -31,7 +31,7 @@ const Int_t eta_max = 16;
 const Int_t phi_max = 15;
 
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
-	if(Tagpass > -1 && m_tag_proc == m_proc){
+	if(Tagpass > -1 && L1pass > -1 && m_tag_proc == m_proc){
     //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
 		return kTRUE;
 	}else{
