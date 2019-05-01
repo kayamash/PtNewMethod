@@ -71,8 +71,9 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
 bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool alpha,std::string filename){
 	Double_t fOrder = 0;
 	Double_t sOrder = 0;
+	Double_t parLimits = 0;
 	if(alpha){//alpha
-		if(par2 == 1){//charge
+		if(par2 == 0){//charge
 			switch(par1){//Sector
 				case 0:
 				fOrder = -0.0184048;
@@ -180,7 +181,11 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
 		fitProf->SetParameter(0,fOrder);
 		fitProf->SetParameter(1,sOrder);
-		prof->Fit(fitProf,"I","",0.,0.3);
+		//if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,,0.);
+		//if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,,0.);
+		//if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,,0.);
+		//if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,,0.);
+		prof->Fit(fitProf,"I","",0.,0.26);
 		p0 = fitProf->GetParameter(0);
 		p1 = fitProf->GetParameter(1);
 		chi = fitProf->GetChisquare();
