@@ -181,10 +181,10 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
 		fitProf->SetParameter(0,fOrder);
 		fitProf->SetParameter(1,sOrder);
-		//if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,,0.);
-		//if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,,0.);
-		//if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,,0.);
-		//if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,,0.);
+		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,-10.,0.);
+		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,0.,10.);
+		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(2,0.,10.);
+		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(2,-10.,0.);
 		prof->Fit(fitProf,"I","",0.,0.26);
 		p0 = fitProf->GetParameter(0);
 		p1 = fitProf->GetParameter(1);
