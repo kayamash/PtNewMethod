@@ -37,18 +37,32 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
 	if(charge == 1.)par[1] = 0;//positive
 	if(charge == -1.)par[1] = 1;//negative
 	
-	Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*15/1.05);
-    par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
+	Int_t tmp_eta = static_cast<Int_t>(std::fabs(eta)*15./1.05);
+    par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15.);//Eta　divide to 30
 
-	Double_t tmp_phi = phi + TMath::Pi();
+	Double_t tmp_phi = phi;
+	Int_t tmp_par = -1;
     if(address == 0 || address == 1){//Large
-    	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
-    	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
-    	tmp_phi -= TMath::Pi()/8.;
+    	if(0.4 < phi && 1.2 > phi)tmp_phi -= TMath::Pi()/4.;
+    	if(1.2 < phi && 2.0 > phi)tmp_phi -= TMath::Pi()/2.;
+    	if(2.0 < phi && 2.8 > phi)tmp_phi -= 3*TMath::Pi()/4.;
+    	if(2.8 < phi)tmp_phi -= TMath::Pi();
+    	if(-0.4 > phi && -1.2 < phi)tmp_phi += TMath::Pi()/4.;
+    	if(-1.2 > phi && -2.0 < phi)tmp_phi += TMath::Pi()/2.;
+    	if(-2.0 > phi && -2.8 < phi)tmp_phi += 3*TMath::Pi()/4.;
+    	if(-2.8 > phi)tmp_phi += TMath::Pi();
+    	tmp_par = static_cast<Int_t>((tmp_phi+0.27)*30./0.54); //Phi divide to 30
     }else if(address == 2 || address == 3){//Small
-    	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
+    	if(0.8 < phi && 1.6 > phi)tmp_phi -= TMath::Pi()/4.;
+    	if(1.6 < phi && 2.4 > phi)tmp_phi -= TMath::Pi()/2.;
+    	if(2.4 < phi)tmp_phi -= 3*TMath::Pi()/4.;
+    	if(0 > phi && -0.8 < phi)tmp_phi += TMath::Pi()/4.;
+    	if(-0.8 > phi && -1.6 < phi)tmp_phi += TMath::Pi()/2.;
+    	if(-1.6 > phi && -2.4 < phi)tmp_phi += 3*TMath::Pi()/4.;
+    	if(-2.4 > phi)tmp_phi += TMath::Pi();
+    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*30./0.56); //Phi divide to 30
     }
-    par[3] = static_cast<Int_t>(tmp_phi*120./TMath::Pi()); //Phi divide to 30
+    if(tmp_par >= 0 && tmp_par <= 29)par[3] = tmp_par;
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
     return kFALSE;
