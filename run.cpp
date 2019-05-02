@@ -19,6 +19,7 @@ const bool usingdata18 = kTRUE;
 const bool usingdata17 = kTRUE;
 const bool usingJpsi = kTRUE;
 const bool usingZ = kTRUE;
+const bool tsakaiMethod = kTRUE;
 
 void run(){
   cout<<"start!"<<endl;
@@ -41,7 +42,11 @@ void run(){
 
   if(!chain)cout<<"tree failed!"<<endl;
   cout<<"Total Events are "<<chain->GetEntries()<<endl;
-  PtNewMethod m(chain);
+  if(tsakaiMethod){
+    PtNewMethod m(chain,16,15);
+  }else{
+    PtNewMethod m(chain,30,30);
+  }
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
   cout<<"loop start!"<<endl;
   for(Int_t i = 0;i < events;i++){

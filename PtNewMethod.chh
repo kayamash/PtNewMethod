@@ -123,6 +123,8 @@ private:
 
   std::string m_method_name;
   Int_t m_proc;
+  Int_t m_etaMax;
+  Int_t m_phiMax;
 
   //TBranch *b_aipc;
   TBranch *b_eNumber;
@@ -224,8 +226,8 @@ private:
   TH2F *m_h_PtvsDeltaThetaLineBI;
   TH1D *m_h_SectorPhiIntegral[16];
   //For LUT
-  TH2F *m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][16][15];//kayamash
-  TH2F *m_h_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][16][15];//kayamash
+  TH2F *m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];//kayamash
+  TH2F *m_h_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];//kayamash
   TH2F *m_h_PtvsBarrelAlpha_LargePositive;
   TH2F *m_h_PtvsBarrelAlpha_LargeNegative;
   TH2F *m_h_PtvsBarrelAlpha_SmallPositive;
@@ -243,12 +245,14 @@ private:
   TH2F *m_h_PtvsBarrelBeta_SSPositive;
   TH2F *m_h_PtvsBarrelBeta_SSNegative;
 
-  TProfile *m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][16][15];//kayamash
-  TProfile *m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][16][15];//kayamash
+  TProfile *m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];//kayamash
+  TProfile *m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];//kayamash
 
 public:
-  PtNewMethod(TTree *tree){
+  PtNewMethod(TTree *tree,Int_t etaM,Int_t phiM){
     tChain = tree;
+    m_etaMax = etaM;
+    m_phiMax = phiM;
     m_eNumber = 0;
     m_rNumber = 0;
     m_tag_proc = 0;
@@ -428,8 +432,8 @@ public:
     //For LUT
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < 16;++eta){
-          for(Int_t phi = 0; phi < 15;++phi){
+        for(Int_t eta = 0; eta < m_etaMax;++eta){
+          for(Int_t phi = 0; phi < m_phiMax;++phi){
             m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
             m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
             m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
@@ -474,8 +478,8 @@ public:
     }
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < 16;++eta){
-          for(Int_t phi = 0; phi < 15;++phi){
+        for(Int_t eta = 0; eta < m_etaMax;++eta){
+          for(Int_t phi = 0; phi < m_phiMax;++phi){
             delete  m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi];
             delete  m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi];
           }
