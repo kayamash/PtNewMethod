@@ -188,7 +188,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     }
     Double_t phiInteg = 0;
     kayamashForLUT LUT(0.,0.);
-    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter,phiInteg);
+    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,poff_eta,poff_phi,LUTparameter,phiInteg);
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
