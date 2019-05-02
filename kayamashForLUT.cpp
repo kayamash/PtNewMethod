@@ -81,7 +81,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     	}
     	tmp_par = static_cast<Int_t>((tmp_phi+0.27)*15./0.54); //Phi divide to 15
     }else if(address == 2 || address == 3){//Small
-    	if(0 < phi && 0.8 > phi)hist[1]->Fill(tmp_phi);
+    	if(0 < phi && 0.8 > phi)hist[1].Fill(tmp_phi);
     	if(0.8 < phi && 1.6 > phi){
     		tmp_phi -= TMath::Pi()/4.;
     		hist[3].Fill(tmp_phi);
