@@ -77,7 +77,10 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		tmp_phi += TMath::Pi();
     		sectorNumber = 9;
     	}
-    	tmp_par = static_cast<Int_t>((tmp_phi+0.35)*30./0.70); //Phi divide to 30
+    	//tmp_par = static_cast<Int_t>((tmp_phi+0.35)*30./0.70); //Phi divide to 30
+    	tmp_par = static_cast<Int_t>((tmp_phi+0.30)*28./0.50) + 1; //Phi divide to 30
+    	if(tmp_phi <= -0.25)tmp_par = 0;
+    	if(tmp_phi >= 0.25)tmp_par = 29;
     }else if(address == 2 || address == 3){//Small
     	if(0 < phi && 0.8 > phi)sectorNumber = 2;
     	if(0.8 < phi && 1.6 > phi){
@@ -108,7 +111,10 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		tmp_phi += TMath::Pi();
     		sectorNumber = 10;
     	}
-    	tmp_par = static_cast<Int_t>((tmp_phi-0.11)*30./0.59); //Phi divide to 30
+    	//tmp_par = static_cast<Int_t>((tmp_phi-0.11)*30./0.59); //Phi divide to 30
+    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*30./0.40); //Phi divide to 30
+    	if(tmp_phi <= 0.20)tmp_par = 0;
+    	if(tmp_phi >= 0.60)tmp_par = 29;
     }
     if(tmp_par >= 0 && tmp_par <= 29)par[3] = tmp_par;
     par[4] = sectorNumber;

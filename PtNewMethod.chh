@@ -216,6 +216,7 @@ private:
 
 
   //Histgram
+  TH1D *m_h_offPt;
   TH1D *m_h_BarrelAlpha;
   TH2F *m_h_PtvsBarrelAlpha;
   TH1D *m_h_BarrelBeta;
@@ -416,6 +417,7 @@ public:
     tChain->SetBranchAddress("probe_mesEFTAG_pass",&m_pEFTAG_pass,&b_pEFTAG_pass);
 
     //histgram
+    m_h_offPt = new TH1D("h_offPt",";;",200,-0.25,99.75);
     m_h_BarrelAlpha = new TH1D("h_BarrelAlpha",";barrel #alpha;Entries",120,-0.6,0.6);
     m_h_PtvsBarrelAlpha = new TH2F("h_PtvsBarrelAlpha","1/p_{T} vs Barrel #alpha;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
     m_h_BarrelBeta = new TH1D("h_BarrelBeta",";barrel #beta;Entries",120,-0.6,0.6);
@@ -463,6 +465,7 @@ public:
   void Loop(Int_t ev,std::string name,Int_t proc);
   void Finalize(TFile *tf1,std::string filenameA,std::string filenameB);
   ~PtNewMethod(){
+    delete  m_h_offPt;
     delete  m_h_BarrelAlpha;
     delete  m_h_PtvsBarrelAlpha;
     delete  m_h_BarrelBeta;

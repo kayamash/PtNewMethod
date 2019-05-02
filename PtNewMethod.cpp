@@ -135,6 +135,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 		}
 	}
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
+	if(!BarrelDicision(pSA_roieta))return;
+	m_h_offPt->Fill(std::fabs(m_pof_pt*0.001));
 	Double_t barrelalpha = -99999;
 	Double_t barrelbeta = -99999;
     //segment
@@ -158,11 +160,11 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	if(BMsegmentcheck)m_h_DeltaThetaBM->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
     //barrel alpha
-	if(pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE)barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(pSA_superpointSlope_BM);//Reciprocal number?
+	if(pSA_superpointR_BM != 0)barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(pSA_superpointSlope_BM);//Reciprocal number?
     //barrel alpha end
 
     //barrel beta
-    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0 && BarrelDicision(pSA_roieta) == kTRUE)barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
+    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0)barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
     //barrel beta end
 
     //Line BI
@@ -238,6 +240,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	kayamashForLUT LUT(16.,15.);
 
 	tf1->cd();
+	m_h_offPt->Write();
 	m_h_BarrelAlpha->Write();
 	m_h_PtvsBarrelAlpha->Write();
 	m_h_BarrelBeta->Write();
