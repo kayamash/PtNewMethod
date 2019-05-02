@@ -48,7 +48,6 @@ void run(){
   if(!chain)cout<<"tree failed!"<<endl;
   cout<<"Total Events are "<<chain->GetEntries()<<endl;
   PtNewMethod m(chain);
-  PtNewMethod m(chain);
   if(tsakaiMethod){
     m.Init(16,15);
   }else{
