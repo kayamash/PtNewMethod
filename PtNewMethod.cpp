@@ -31,7 +31,7 @@ const Int_t eta_max = 16;
 const Int_t phi_max = 15;
 
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
-	if(Tagpass > -1 && L1pass > -1 && m_tag_proc == m_proc){
+	if(L1pass > -1 && m_tag_proc == m_proc){
     //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
 		return kTRUE;
 	}else{
@@ -185,12 +185,12 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
     }
 
-    Int_t LUTparameter[4];
-    for(Int_t i = 0; i < 4; ++i){
+    Int_t LUTparameter[6];//sector charge eta phi sectorNumber tmp_phi
+    for(Int_t i = 0; i < 6; ++i){
     	LUTparameter[i] = 0;
     }
     kayamashForLUT LUT;
-    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter,m_h_SectorPhiIntegral);
+    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
@@ -237,6 +237,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
+    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4]]->Fill(LUTparameter[5]);
 
 }
 
