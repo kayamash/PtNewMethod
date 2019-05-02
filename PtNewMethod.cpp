@@ -342,5 +342,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     m_h_PtvsBarrelBeta_LSNegative->Write();
     m_h_PtvsBarrelBeta_SSPositive->Write();
     m_h_PtvsBarrelBeta_SSNegative->Write();
+    for(Int_t i = 0; i < 16;++i){
+    	m_h_SectorPhiIntegral[i]->Write();
+    }
 	cout<<"finish!!"<<endl;
 }

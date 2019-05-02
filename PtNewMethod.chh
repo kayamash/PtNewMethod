@@ -222,6 +222,7 @@ private:
   TH1D *m_h_DeltaThetaBM;
   TH1D *m_h_DeltaThetaLineBI;
   TH2F *m_h_PtvsDeltaThetaLineBI;
+  TH1D *m_h_SectorPhiIntegral[16];
   //For LUT
   TH2F *m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][16][15];//kayamash
   TH2F *m_h_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][16][15];//kayamash
@@ -421,6 +422,9 @@ public:
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",100,-0.5,0.5);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,100,-0.5,0.5);
+    for(Int_t 1 = 0; i < 16;++i){
+      m_h_SectorPhiIntegral[i] = new TH1D(Form("h_Sector%dPhiIntegral",i+1),";SA #phi;Events",628,-TMath::Pi(),TMath::Pi());
+    }
     //For LUT
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
@@ -454,7 +458,7 @@ public:
 
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
-  bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4]);
+  bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[4],TH1D (&hist)[16]);
   //bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,std::string filename);
   void Loop(Int_t ev,std::string name,Int_t proc);
   void Finalize(TFile *tf1,std::string filenameA,std::string filenameB);
@@ -467,6 +471,9 @@ public:
     delete  m_h_DeltaThetaBM;
     delete  m_h_DeltaThetaLineBI;
     delete  m_h_PtvsDeltaThetaLineBI;
+    for(Int_t i = 0; i < 16; ++i){
+      delete  m_h_SectorPhiIntegral[i];
+    }
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
         for(Int_t eta = 0; eta < 16;++eta){
