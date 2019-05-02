@@ -7,14 +7,14 @@
 
 const string inputfiledata18list = "/home/kayamash/LUTlist/20190416data18_physics_Main_JPZtap.list";
 const string inputfiledata17list = "/home/kayamash/LUTlist/20190430data17_physics_Main_JPZtap.list";
-const  string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/tsakai/data18_physics_Main_JPZtap.root";
-const  string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodAlphaJPZ.LUT";
-const  string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodBetaJPZ.LUT";
+const  string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/data18_physics_Main_JPZtap.root";
+const  string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/NewMethodAlphaJPZ.LUT";
+const  string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/NewMethodBetaJPZ.LUT";
 const string triggermu4 = "mu4";//JPsimumu
 const string triggermu26 = "mu26ivm";//Zmumu
 const Int_t procJpsi = 1;//Jpsitap = 1,Ztap = 3
 const Int_t procZ = 3;//Jpsitap = 1,Ztap = 3
-const bool EventFullScan = kFALSE;//kTRUE = All Event,kFALSE = 1000000 events test
+const bool EventFullScan = kTRUE;//kTRUE = All Event,kFALSE = 1000000 events test
 const bool usingdata18 = kTRUE;
 const bool usingdata17 = kTRUE;
 const bool usingJpsi = kTRUE;
