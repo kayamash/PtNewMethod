@@ -113,6 +113,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     if(tmp_par >= 0 && tmp_par <= 29)par[3] = tmp_par;
     par[4] = sectorNumber;
     par[5] = tmp_phi;
+    cout<<tmp_phi<<endl;
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
     return kFALSE;

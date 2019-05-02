@@ -235,6 +235,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	}
     }
     if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4] - 1]->Fill(LUTparameter[5]);
+    cout<<LUTparameter[0]<<"   "<<LUTparameter[1]<<"   "<<LUTparameter[2]<<"   "<<LUTparameter[3]<<"   "<<LUTparameter[4]<<"   "<<LUTparameter[5]<<endl;
 
 }
 
