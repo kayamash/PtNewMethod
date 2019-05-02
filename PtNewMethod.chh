@@ -249,10 +249,8 @@ private:
   TProfile *m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];//kayamash
 
 public:
-  PtNewMethod(TTree *tree,Int_t etaM,Int_t phiM){
+  PtNewMethod(TTree *tree){
     tChain = tree;
-    m_etaMax = etaM;
-    m_phiMax = phiM;
     m_eNumber = 0;
     m_rNumber = 0;
     m_tag_proc = 0;
@@ -460,6 +458,7 @@ public:
     m_h_PtvsBarrelBeta_SSNegative = new TH2F("h_PtvsBarrelBeta_SSNegative","1/p_{T} vs Barrel #beta;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
   }
 
+  void Init(Int_t par1,Int_t par2);
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
   void Loop(Int_t ev,std::string name,Int_t proc);

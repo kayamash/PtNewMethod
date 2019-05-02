@@ -8,15 +8,14 @@
 const bool tsakaiMethod = kTRUE;
 const string inputfiledata18list = "/home/kayamash/LUTlist/20190416data18_physics_Main_JPZtap.list";
 const string inputfiledata17list = "/home/kayamash/LUTlist/20190430data17_physics_Main_JPZtap.list";
+string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/data18_physics_Main_JPZtap.root";
+string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/NewMethodAlphaJPZ.LUT";
+string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/kayamashNewMethodBetaJPZ.LUT";
 if(tsakaiMethod){
-    const string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/tsakai/data18_physics_Main_JPZtap.root";
-    const string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodAlphaJPZ.LUT";
-    const string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodBetaJPZ.LUT";
-}else{
-    const string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/data18_physics_Main_JPZtap.root";
-    const string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/NewMethodAlphaJPZ.LUT";
-    const string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/kayamashNewMethodBetaJPZ.LUT";
-}
+    outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/tsakai/data18_physics_Main_JPZtap.root";
+    LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodAlphaJPZ.LUT";
+    LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodBetaJPZ.LUT";
+  }
 const string triggermu4 = "mu4";//JPsimumu
 const string triggermu26 = "mu26ivm";//Zmumu
 const Int_t procJpsi = 1;//Jpsitap = 1,Ztap = 3
@@ -48,10 +47,12 @@ void run(){
 
   if(!chain)cout<<"tree failed!"<<endl;
   cout<<"Total Events are "<<chain->GetEntries()<<endl;
+  PtNewMethod m(chain);
+  PtNewMethod m(chain);
   if(tsakaiMethod){
-    PtNewMethod m(chain,16,15);
+    m.Init(16,15);
   }else{
-    PtNewMethod m(chain,30,30);
+    m.Init(30,30);
   }
   const Int_t events = (EventFullScan) ? (chain->GetEntries()) : (1000000);
   cout<<"loop start!"<<endl;

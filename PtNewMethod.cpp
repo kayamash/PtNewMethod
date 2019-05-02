@@ -27,6 +27,11 @@
 #include <TObject.h>
 #include <TProfile.h>
 
+void PtNewMethod::Init(Int_t par1,Int_t par2){
+	m_etaMax = par1;
+	m_phiMax = par2;
+}
+
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
 	if(L1pass > -1 && m_tag_proc == m_proc){
     //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
