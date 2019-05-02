@@ -226,7 +226,6 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	}
     }
     if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4] - 1]->Fill(phiInteg);
-    cout<<LUTparameter[0]<<"   "<<LUTparameter[1]<<"   "<<LUTparameter[2]<<"   "<<LUTparameter[3]<<"   "<<LUTparameter[4]<<"   "<<phiInteg<<endl;
 
 }
 
@@ -269,8 +268,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 			if(charge == 1 && sector == 0)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
 			if(charge == 1 && sector == 3)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
 			if(charge == 1 && sector == 4)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
-        	for(Int_t eta = 0; eta < 16;++eta){
-        		for(Int_t phi = 0; phi < 15;++phi){
+        	for(Int_t eta = 0; eta < 30;++eta){
+        		for(Int_t phi = 0; phi < 30;++phi){
         			m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->ProfileX();
         			LUT.WriteLUT(m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi],sector,charge,eta,phi,kTRUE,filenameA);
@@ -306,8 +305,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 			if(charge == 1 && (sector == 1 || sector == 2))tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
 			if(charge == 1 && sector == 3)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
 			if(charge == 1 && sector == 4)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
-        	for(Int_t eta = 0; eta < 16;++eta){
-        		for(Int_t phi = 0; phi < 15;++phi){
+        	for(Int_t eta = 0; eta < 30;++eta){
+        		for(Int_t phi = 0; phi < 30;++phi){
         			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         		}
