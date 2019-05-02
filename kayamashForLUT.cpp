@@ -46,69 +46,69 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
 	Double_t tmp_phi = phi;
 	Int_t tmp_par = -1;
     if(address == 0 || address == 1){//Large
-    	if(-0.4 < phi && 0.4 > phi)hist[0]->Fill(tmp_phi);
+    	if(-0.4 < phi && 0.4 > phi)hist[0].Fill(tmp_phi);
     	if(0.4 < phi && 1.2 > phi){
     		tmp_phi -= TMath::Pi()/4.;
-    		hist[2]->Fill(tmp_phi);
+    		hist[2].Fill(tmp_phi);
     	}
     	if(1.2 < phi && 2.0 > phi){
     		tmp_phi -= TMath::Pi()/2.;
-    		hist[4]->Fill(tmp_phi);
+    		hist[4].Fill(tmp_phi);
     	}
     	if(2.0 < phi && 2.8 > phi){
     		tmp_phi -= 3*TMath::Pi()/4.;
-    		hist[6]->Fill(tmp_phi);
+    		hist[6].Fill(tmp_phi);
     	}
     	if(2.8 < phi){
     		tmp_phi -= TMath::Pi();
-    		hist[8]->Fill(tmp_phi);
+    		hist[8].Fill(tmp_phi);
     	}
     	if(-0.4 > phi && -1.2 < phi){
     		tmp_phi += TMath::Pi()/4.;
-    		hist[14]->Fill(tmp_phi);
+    		hist[14].Fill(tmp_phi);
     	}
     	if(-1.2 > phi && -2.0 < phi){
     		tmp_phi += TMath::Pi()/2.;
-    		hist[12]->Fill(tmp_phi);
+    		hist[12].Fill(tmp_phi);
     	}
     	if(-2.0 > phi && -2.8 < phi){
     		tmp_phi += 3*TMath::Pi()/4.;
-    		hist[10]->Fill(tmp_phi);
+    		hist[10].Fill(tmp_phi);
     	}
     	if(-2.8 > phi){
     		tmp_phi += TMath::Pi();
-    		hist[8]->Fill(tmp_phi);
+    		hist[8].Fill(tmp_phi);
     	}
     	tmp_par = static_cast<Int_t>((tmp_phi+0.27)*15./0.54); //Phi divide to 15
     }else if(address == 2 || address == 3){//Small
     	if(0 < phi && 0.8 > phi)hist[1]->Fill(tmp_phi);
     	if(0.8 < phi && 1.6 > phi){
     		tmp_phi -= TMath::Pi()/4.;
-    		hist[3]->Fill(tmp_phi);
+    		hist[3].Fill(tmp_phi);
     	}
     	if(1.6 < phi && 2.4 > phi){
     		tmp_phi -= TMath::Pi()/2.;
-    		hist[5]->Fill(tmp_phi);
+    		hist[5].Fill(tmp_phi);
     	}
     	if(2.4 < phi){
     		tmp_phi -= 3*TMath::Pi()/4.;
-    		hist[7]->Fill(tmp_phi);
+    		hist[7].Fill(tmp_phi);
     	}
     	if(0 > phi && -0.8 < phi){
     		tmp_phi += TMath::Pi()/4.;
-    		hist[15]->Fill(tmp_phi);
+    		hist[15].Fill(tmp_phi);
     	}
     	if(-0.8 > phi && -1.6 < phi){
     		tmp_phi += TMath::Pi()/2.;
-    		hist[13]->Fill(tmp_phi);
+    		hist[13].Fill(tmp_phi);
     	}
     	if(-1.6 > phi && -2.4 < phi){
     		tmp_phi += 3*TMath::Pi()/4.;
-    		hist[11]->Fill(tmp_phi);
+    		hist[11].Fill(tmp_phi);
     	}
     	if(-2.4 > phi){
     		tmp_phi += TMath::Pi();
-    		hist[9]->Fill(tmp_phi);
+    		hist[9].Fill(tmp_phi);
     	}
     	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*15./0.56); //Phi divide to 15
     }
