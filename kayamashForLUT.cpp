@@ -26,7 +26,7 @@
 #include <TProfile.h>
 #include "kayamashForLUT.chh"
 
-bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[5],Double_t tmp_phi1){
+bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[5],Double_t &tmp_phi1){
 	for(Int_t i = 0; i < 4; ++i)par[i] = -1;
 	if(address == 0.)par[0] = 0;//Large
 	if(address == 1. && phi < -1.5)par[0] = 1;//LS sector 11
