@@ -11,11 +11,6 @@ const string inputfiledata17list = "/home/kayamash/LUTlist/20190430data17_physic
 string outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/data18_physics_Main_JPZtap.root";
 string LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/NewMethodAlphaJPZ.LUT";
 string LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/kayamashNewMethodBetaJPZ.LUT";
-if(tsakaiMethod){
-    outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/tsakai/data18_physics_Main_JPZtap.root";
-    LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodAlphaJPZ.LUT";
-    LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodBetaJPZ.LUT";
-  }
 const string triggermu4 = "mu4";//JPsimumu
 const string triggermu26 = "mu26ivm";//Zmumu
 const Int_t procJpsi = 1;//Jpsitap = 1,Ztap = 3
@@ -28,6 +23,12 @@ const bool usingZ = kTRUE;
 
 void run(){
   cout<<"start!"<<endl;
+  if(tsakaiMethod){
+    outputfilename = "/gpfs/fs6001/kayamash/Mywork/LUT/tsakai/data18_physics_Main_JPZtap.root";
+    LUTnameAlpha = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodAlphaJPZ.LUT";
+    LUTnameBeta = "/gpfs/fs7001/kayamash/Mywork/LUT/tsakai/NewMethodBetaJPZ.LUT";
+  }
+
   //Add chain
   TChain *chain = new TChain("t_tap");
   if(usingdata18){
