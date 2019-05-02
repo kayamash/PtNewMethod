@@ -172,16 +172,6 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	m_h_PtvsDeltaThetaLineBI->Fill(std::fabs(m_poff_pt*0.001),deltaThetaLineBI);
     }
 
-    //For LUT
-    Double_t tmp_phi = pSA_phi + TMath::Pi();
-    if(pSA_sAddress == 0 || pSA_sAddress == 1){//Large
-    	while(tmp_phi > 3*TMath::Pi()/8.)tmp_phi -= TMath::Pi()/4.;
-    	while(tmp_phi < TMath::Pi()/8.)tmp_phi += TMath::Pi()/4.;
-    	tmp_phi -= TMath::Pi()/8.;
-    }else if(pSA_sAddress == 2 || pSA_sAddress == 3){//Small
-    	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
-    }
-
     Int_t LUTparameter[5];//sector charge eta phi sectorNumber tmp_phi
     for(Int_t i = 0; i < 6; ++i){
     	LUTparameter[i] = 0;
