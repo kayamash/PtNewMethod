@@ -112,7 +112,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		sectorNumber = 10;
     	}
     	//tmp_par = static_cast<Int_t>((tmp_phi-0.11)*30./0.59); //Phi divide to 30
-    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*30./0.40); //Phi divide to 30
+    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*28./0.40); //Phi divide to 30
     	if(tmp_phi <= 0.20)tmp_par = 0;
     	if(tmp_phi >= 0.60)tmp_par = 29;
     }
