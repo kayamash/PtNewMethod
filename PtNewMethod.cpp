@@ -182,12 +182,13 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	while(tmp_phi > TMath::Pi()/4.)tmp_phi -= TMath::Pi()/4.;
     }
 
-    Int_t LUTparameter[6];//sector charge eta phi sectorNumber tmp_phi
+    Int_t LUTparameter[5];//sector charge eta phi sectorNumber tmp_phi
     for(Int_t i = 0; i < 6; ++i){
     	LUTparameter[i] = 0;
     }
+    Double_t tmp_phi = 0;
     kayamashForLUT LUT(0.,0.);
-    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter);
+    bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,pSA_eta,pSA_phi,LUTparameter,tmp_phi);
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
@@ -234,8 +235,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
-    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4] - 1]->Fill(LUTparameter[5]);
-    cout<<LUTparameter[0]<<"   "<<LUTparameter[1]<<"   "<<LUTparameter[2]<<"   "<<LUTparameter[3]<<"   "<<LUTparameter[4]<<"   "<<LUTparameter[5]<<endl;
+    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4] - 1]->Fill(tmp_phi);
+    cout<<LUTparameter[0]<<"   "<<LUTparameter[1]<<"   "<<LUTparameter[2]<<"   "<<LUTparameter[3]<<"   "<<LUTparameter[4]<<"   "<<tmp_phi<<endl;
 
 }
 
