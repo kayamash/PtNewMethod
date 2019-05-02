@@ -27,11 +27,6 @@
 #include <TObject.h>
 #include <TProfile.h>
 
-void PtNewMethod::Init(Int_t par1,Int_t par2){
-	m_etaMax = par1;
-	m_phiMax = par2;
-}
-
 bool PtNewMethod::CutAll(Int_t Tagpass,Int_t L1pass){
 	if(L1pass > -1 && m_tag_proc == m_proc){
     //if(m_sumReqdRL1 < m_tp_extdR && 0.2 < m_tp_extdR && m_sumReqdREF < m_tp_dR && Tagpass > -1 && m_tag_proc == m_proc && L1pass > -1 && m_poff_charge*m_tag_charge == -1){
@@ -249,7 +244,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	ofs.close();
 	ofs.open(filenameB.c_str());
 	ofs.close();
-	kayamashForLUT LUT(static_cast<Double_t>(m_etaMax),static_cast<Double_t>(m_phiMax));
+	kayamashForLUT LUT(16.,15.);
 
 	tf1->cd();
 	m_h_BarrelAlpha->Write();
@@ -282,8 +277,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 			if(charge == 1 && sector == 0)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
 			if(charge == 1 && sector == 3)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
 			if(charge == 1 && sector == 4)tf1->cd("h_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
-        	for(Int_t eta = 0; eta < m_etaMax;++eta){
-        		for(Int_t phi = 0; phi < m_phiMax;++phi){
+        	for(Int_t eta = 0; eta < 16;++eta){
+        		for(Int_t phi = 0; phi < 15;++phi){
         			m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->ProfileX();
         			LUT.WriteLUT(m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi],sector,charge,eta,phi,kTRUE,filenameA);
@@ -319,8 +314,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 			if(charge == 1 && (sector == 1 || sector == 2))tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/LargeSpecial");
 			if(charge == 1 && sector == 3)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/Small");
 			if(charge == 1 && sector == 4)tf1->cd("Profile_PtvsBarrelAlpha_SectorChargeEtaPhi/negative/SmallSpecial");
-        	for(Int_t eta = 0; eta < m_etaMax;++eta){
-        		for(Int_t phi = 0; phi < m_phiMax;++phi){
+        	for(Int_t eta = 0; eta < 16;++eta){
+        		for(Int_t phi = 0; phi < 15;++phi){
         			m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         			m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi]->Write();
         		}

@@ -430,8 +430,8 @@ public:
     //For LUT
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < m_etaMax;++eta){
-          for(Int_t phi = 0; phi < m_phiMax;++phi){
+        for(Int_t eta = 0; eta < 30;++eta){
+          for(Int_t phi = 0; phi < 30;++phi){
             m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #alpha;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
             m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
             m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
@@ -458,7 +458,6 @@ public:
     m_h_PtvsBarrelBeta_SSNegative = new TH2F("h_PtvsBarrelBeta_SSNegative","1/p_{T} vs Barrel #beta;1/p_{T};barrel #alpha",30,0.,0.3,100,-0.5,0.5);
   }
 
-  void Init(Int_t par1,Int_t par2);
   bool CutAll(Int_t Tagpass,Int_t L1pass);
   bool BarrelDicision(Float_t eta);
   void Loop(Int_t ev,std::string name,Int_t proc);
@@ -477,8 +476,8 @@ public:
     }
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative
-        for(Int_t eta = 0; eta < m_etaMax;++eta){
-          for(Int_t phi = 0; phi < m_phiMax;++phi){
+        for(Int_t eta = 0; eta < 30;++eta){
+          for(Int_t phi = 0; phi < 30;++phi){
             delete  m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi];
             delete  m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi];
           }
