@@ -230,7 +230,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
-    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[4] - 1]->Fill(phiInteg);
+    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[3] - 1]->Fill(phiInteg);
 
 }
 
