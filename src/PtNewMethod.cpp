@@ -230,7 +230,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
-    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
+    if(LUTparameter[4] != -1 && (pSA_sAddress == 0 || pSA_sAddress == 1))m_h_LargeSectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
+    if(LUTparameter[4] != -1 && (pSA_sAddress == 2 || pSA_sAddress == 3))m_h_SmallSectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
 
 }
 
@@ -338,7 +339,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     m_h_PtvsBarrelBeta_SSPositive->Write();
     m_h_PtvsBarrelBeta_SSNegative->Write();
     for(Int_t i = 0; i < 30;++i){
-    	m_h_SectorPhiIntegral[i]->Write();
+    	m_h_LargeSectorPhiIntegral[i]->Write();
+    	m_h_SmallSectorPhiIntegral[i]->Write();
     }
 	cout<<"finish!!"<<endl;
 }
