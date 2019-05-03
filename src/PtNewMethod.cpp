@@ -177,7 +177,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	m_h_PtvsDeltaThetaLineBI->Fill(std::fabs(m_poff_pt*0.001),deltaThetaLineBI);
     }
 
-    Int_t LUTparameter[5];//sector charge eta phi sectorNumber tmp_phi
+    Int_t LUTparameter[5];//sector charge eta phi sectorNumber
     for(Int_t i = 0; i < 6; ++i){
     	LUTparameter[i] = 0;
     }
@@ -230,7 +230,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
-    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[3] - 1]->Fill(phiInteg);
+    if(LUTparameter[4] != -1)m_h_SectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
 
 }
 
@@ -337,7 +337,7 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     m_h_PtvsBarrelBeta_LSNegative->Write();
     m_h_PtvsBarrelBeta_SSPositive->Write();
     m_h_PtvsBarrelBeta_SSNegative->Write();
-    for(Int_t i = 0; i < 16;++i){
+    for(Int_t i = 0; i < 30;++i){
     	m_h_SectorPhiIntegral[i]->Write();
     }
 	cout<<"finish!!"<<endl;
