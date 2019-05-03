@@ -1,4 +1,4 @@
-#include "PtNewMethod.chh"
+#include "../PtNewMethod/PtNewMethod.chh"
 #include "kayamashForLUT.cpp"
 #include <TROOT.h>
 #include <TChain.h>

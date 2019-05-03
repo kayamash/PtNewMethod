@@ -3,7 +3,7 @@
 #include <TLegend.h>
 #include <TMath.h>
 #include <TBranch.h>
-#include "PtNewMethod.cpp"
+#include "../src/PtNewMethod.cpp"
 
 const string inputfiledata18list = "/home/kayamash/LUTlist/20190416data18_physics_Main_JPZtap.list";
 const string inputfiledata17list = "/home/kayamash/LUTlist/20190430data17_physics_Main_JPZtap.list";
