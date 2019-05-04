@@ -186,19 +186,19 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,m_poff_eta,m_poff_phi,LUTparameter,phiInteg);
     if(LUTcheck)switch(LUTparameter[0]){
     	case 0:
-    	m_h_LargePhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	m_h_LargePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 1:
-    	m_h_Sector11PhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	m_h_Sector11PhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 2:
-    	m_h_Sector15PhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	m_h_Sector15PhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 3:
-    	m_h_SmallPhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	m_h_SmallPhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 4:
-    	m_h_SmallSpecialPhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	m_h_SmallSpecialPhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     }
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
