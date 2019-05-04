@@ -41,7 +41,7 @@ public:
 	}
 	bool getLUTparameter(Double_t address,Double_t charge,Double_t eta,Double_t phi,Int_t (&par)[5],Double_t &tmp_phi1);
 	bool WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,Int_t par4,bool alpha,std::string filename);//if alpha, alpha = kTRUE
-	bool ReadLUT(Int_t (&par)[4],std::string lut,Double_t par1,Double_t par2);
+	bool ReadLUT(Int_t (&par)[4],std::string lut,Double_t &par1,Double_t &par2);
 
 };
 

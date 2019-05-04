@@ -114,7 +114,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		tmp_phi += TMath::Pi();
     		sectorNumber = 10;
     	}
-    	
+
     	Double_t dividePhi = 0.60/28.;
     	for(Int_t loop = 0; loop < 30;++loop){
     		if(loop == 0 && tmp_phi < 0.2)tmp_par = loop;
@@ -260,7 +260,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	return kTRUE;
 }
 
-bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t par1,Double_t par2){
+bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t &par1,Double_t &par2){
 	ifstream ifs(lut.c_str());
 	bool check = kFALSE;
 	while(!ifs.eof()){
