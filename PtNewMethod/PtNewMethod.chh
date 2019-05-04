@@ -429,8 +429,8 @@ public:
     m_h_DeltaThetaBM = new TH1D("h_DeltaThetaBM","Slope #Delta#theta BM;offline - SA #Delta #theta;Events",200,-0.1,0.1);
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",100,-0.5,0.5);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,100,-0.5,0.5);
-    m_h_OfflineEtavsPhiLarge = new TH2F("h_OfflineEtavsPhiLarge","Offline;Offline #eta;Offline #phi",1050,0,1.05,628,-TMath::Pi(),TMath::Pi());
-    m_h_OfflineEtavsPhiSmall = new TH2F("h_OfflineEtavsPhiSmall","Offline;Offline #eta;Offline #phi",1050,0,1.05,628,-TMath::Pi(),TMath::Pi());
+    m_h_OfflineEtavsPhiLarge = new TH2F("h_OfflineEtavsPhiLarge","Offline;Offline #eta;Offline #phi",1050,0,1.05,6280,-TMath::Pi(),TMath::Pi());
+    m_h_OfflineEtavsPhiSmall = new TH2F("h_OfflineEtavsPhiSmall","Offline;Offline #eta;Offline #phi",1050,0,1.05,6280,-TMath::Pi(),TMath::Pi());
     for(Int_t i = 0; i < 30;++i){
       m_h_LargeSectorPhiIntegral[i] = new TH1D(Form("h_LargeSectorPhiIntegral%d",i),";SA #phi;Events",628,-TMath::Pi(),TMath::Pi());
       m_h_SmallSectorPhiIntegral[i] = new TH1D(Form("h_SmallSectorPhiIntegral%d",i),";SA #phi;Events",628,-TMath::Pi(),TMath::Pi());
