@@ -140,6 +140,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
 	if(!BarrelDicision(pSA_roieta))return;
 	m_h_offPt->Fill(std::fabs(m_poff_pt*0.001));
+	if(pSA_sAddress == 0 || pSA_sAddress == 1)m_h_OfflineEtavsPhiLarge->Fill(m_poff_eta,m_poff_phi);
+	if(pSA_sAddress == 2 || pSA_sAddress == 3)m_h_OfflineEtavsPhiSmall->Fill(m_poff_eta,m_poff_phi);
 	Double_t barrelalpha = -99999;
 	Double_t barrelbeta = -99999;
     //segment
@@ -253,6 +255,8 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	m_h_DeltaThetaBM->Write();
 	m_h_DeltaThetaLineBI->Write();
 	m_h_PtvsDeltaThetaLineBI->Write();
+	m_h_OfflineEtavsPhiLarge->Write();
+	m_h_OfflineEtavsPhiSmall->Write();
 	//For LUT
 	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi");
 	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive");
