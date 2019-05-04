@@ -77,12 +77,8 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		tmp_phi += TMath::Pi();
     		sectorNumber = 9;
     	}
-    	/*
-    	tmp_par = static_cast<Int_t>((tmp_phi+0.30)*28./0.50) + 1; //Phi divide to 30
-    	if(tmp_phi <= -0.25)tmp_par = 0;
-    	if(tmp_phi >= 0.25)tmp_par = 29;
-    	*/
-    	Double_t dividePhi = 0.40/30.;
+
+    	Double_t dividePhi = 0.40/28.;
     	for(Int_t loop = 0; loop < 30;++loop){
     		if(loop == 0 && tmp_phi < -0.2)tmp_par = loop;
     		if(loop != 0 && loop != 29 && tmp_phi >= -0.2 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < -0.2 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
@@ -118,12 +114,8 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		tmp_phi += TMath::Pi();
     		sectorNumber = 10;
     	}
-    	/*
-    	tmp_par = static_cast<Int_t>((tmp_phi-0.20)*28./0.40); //Phi divide to 30
-    	if(tmp_phi <= 0.20)tmp_par = 0;
-    	if(tmp_phi >= 0.60)tmp_par = 29;
-    	*/
-    	Double_t dividePhi = 0.60/30.;
+    	
+    	Double_t dividePhi = 0.60/28.;
     	for(Int_t loop = 0; loop < 30;++loop){
     		if(loop == 0 && tmp_phi < 0.2)tmp_par = loop;
     		if(loop != 0 && loop != 29 && tmp_phi >= 0.2 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < 0.2 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
