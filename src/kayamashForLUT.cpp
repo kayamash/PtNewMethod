@@ -245,8 +245,8 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		Int_t binMin= 0;
 		bool firstBin = kFALSE;
 		for(Int_t bin = 1; bin < 31; ++bin){
-			if(Prof->GetBinContent(bin) != 0)binMax = bin -1;
-			if(!firstBin && Prof->GetBinContent(bin) != 0){
+			if(prof->GetBinContent(bin) != 0)binMax = bin -1;
+			if(!firstBin && prof->GetBinContent(bin) != 0){
 				binMin = bin -1;
 				firstBin = kTRUE;
 			}
