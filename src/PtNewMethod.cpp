@@ -140,8 +140,6 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
 	if(!BarrelDicision(pSA_roieta))return;
 	m_h_offPt->Fill(std::fabs(m_poff_pt*0.001));
-	if(pSA_sAddress == 0 || pSA_sAddress == 1)m_h_OfflineEtavsPhiLarge->Fill(m_poff_eta,m_poff_phi);
-	if(pSA_sAddress == 2 || pSA_sAddress == 3)m_h_OfflineEtavsPhiSmall->Fill(m_poff_eta,m_poff_phi);
 	Double_t barrelalpha = -99999;
 	Double_t barrelbeta = -99999;
     //segment
@@ -180,12 +178,29 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     }
 
     Int_t LUTparameter[5];//sector charge eta phi sectorNumber
-    for(Int_t i = 0; i < 6; ++i){
+    for(Int_t i = 0; i < 5; ++i){
     	LUTparameter[i] = 0;
     }
     Double_t phiInteg = 0;
     kayamashForLUT LUT(0.,0.);
     bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,m_poff_eta,m_poff_phi,LUTparameter,phiInteg);
+    if(LUTcheck)switch(LUTparameter[0]){
+    	case 0:
+    	m_h_LargePhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	break;
+    	case 1:
+    	m_h_Sector11PhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	break;
+    	case 2:
+    	m_h_Sector15PhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	break;
+    	case 3:
+    	m_h_SmallPhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	break;
+    	case 4:
+    	m_h_SmallSpecialPhiEta[LUTparameter[2]]->Fill(m_poff_phi);
+    	break;
+    }
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
@@ -232,9 +247,6 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     		break;
     	}
     }
-    if(LUTparameter[4] != -1 && (pSA_sAddress == 0 || pSA_sAddress == 1))m_h_LargeSectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
-    if(LUTparameter[4] != -1 && (pSA_sAddress == 2 || pSA_sAddress == 3))m_h_SmallSectorPhiIntegral[LUTparameter[3]]->Fill(phiInteg);
-
 }
 
 void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filenameB){
@@ -255,8 +267,6 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
 	m_h_DeltaThetaBM->Write();
 	m_h_DeltaThetaLineBI->Write();
 	m_h_PtvsDeltaThetaLineBI->Write();
-	m_h_OfflineEtavsPhiLarge->Write();
-	m_h_OfflineEtavsPhiSmall->Write();
 	//For LUT
 	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi");
 	tf1->mkdir("h_PtvsBarrelAlpha_SectorChargeEtaPhi/positive");
@@ -343,8 +353,11 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     m_h_PtvsBarrelBeta_SSPositive->Write();
     m_h_PtvsBarrelBeta_SSNegative->Write();
     for(Int_t i = 0; i < 30;++i){
-    	m_h_LargeSectorPhiIntegral[i]->Write();
-    	m_h_SmallSectorPhiIntegral[i]->Write();
+    	m_h_LargePhiEta[i]->Write();
+    	m_h_Sector11PhiEta[i]->Write();
+    	m_h_Sector15PhiEta[i]->Write();
+    	m_h_SmallPhiEta[i]->Write();
+    	m_h_SmallSpecialPhiEta[i]->Write();
     }
 	cout<<"finish!!"<<endl;
 }
