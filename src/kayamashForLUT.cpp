@@ -241,13 +241,23 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	Double_t pValue = 0;
 	if(prof->GetEntries() != 0){
 		TF1 *fitProf = new TF1("fitProf","[0]*x + [1]*x*x",0.,0.3);
+		Int_t binMax = 0;
+		Int_t binMin= 0;
+		bool firstBin = kFALSE;
+		for(Int_t bin = 1; bin < 31; ++bin){
+			if(fitProf->GetBinContent(bin) != 0)binMax = bin -1;
+			if(!firstBin && fitProf->GetBinContent(bin) != 0){
+				binMin = bin -1;
+				firstBin = kTRUE;
+			}
+		}
 		fitProf->SetParameter(0,fOrder);
 		fitProf->SetParameter(1,sOrder);
 		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,-10.,0.);
 		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,0.,10.);
 		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(2,0.,10.);
 		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(2,-10.,0.);
-		prof->Fit(fitProf,"I","",0.,0.26);
+		prof->Fit(fitProf,"I","",binMin*0.01,binMax*0.01);
 		p0 = fitProf->GetParameter(0);
 		p1 = fitProf->GetParameter(1);
 		chi = fitProf->GetChisquare();
@@ -255,7 +265,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		pValue = TMath::Prob(chi, Ndof);
 	}
 
-	ofs<<par1<<"   "<<par2<<"   "<<par3<<"   "<<par4<<"   "<<p0<<"   "<<p1<<std::endl;
+	ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<std::endl;
 	ofs.close();
 	return kTRUE;
 }
