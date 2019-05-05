@@ -86,11 +86,11 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		sectorNumber = 9;
     	}
 
-    	Double_t dividePhi = 0.40/28.;
+    	Double_t dividePhi = 0.50/28.;
     	for(Int_t loop = 0; loop < 30;++loop){
-    		if(loop == 0 && tmp_phi < -0.2)tmp_par = loop;
-    		if(loop != 0 && loop != 29 && tmp_phi >= -0.2 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < -0.2 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
-    		if(loop == 29 && tmp_phi >= 0.2)tmp_par = loop;
+    		if(loop == 0 && tmp_phi < -0.25)tmp_par = loop;
+    		if(loop != 0 && loop != 29 && tmp_phi >= -0.25 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < -0.25 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
+    		if(loop == 29 && tmp_phi >= 0.25)tmp_par = loop;
     	}
     }else if(address == 2 || address == 3){//Small
     	if(0 < phi && 0.8 > phi)sectorNumber = 2;
@@ -123,11 +123,11 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     		sectorNumber = 10;
     	}
 
-    	Double_t dividePhi = 0.60/28.;
+    	Double_t dividePhi = 0.4/28.;
     	for(Int_t loop = 0; loop < 30;++loop){
     		if(loop == 0 && tmp_phi < 0.2)tmp_par = loop;
     		if(loop != 0 && loop != 29 && tmp_phi >= 0.2 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < 0.2 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
-    		if(loop == 29 && tmp_phi >= 0.8)tmp_par = loop;
+    		if(loop == 29 && tmp_phi >= 0.6)tmp_par = loop;
     	}
     }
     if(tmp_par >= 0 && tmp_par <= 29)par[3] = tmp_par;
@@ -135,6 +135,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     tmp_phi1 = tmp_phi;
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
+    cerr<<" missing getLUTparameter"<<endl;
     return kFALSE;
 }
 
@@ -273,7 +274,11 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		pValue = TMath::Prob(chi, Ndof);
 	}
 
-	ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<std::endl;
+	if(par3 != 0 && par3 != 14 && par3 != 15 && par3 != 29){
+		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<std::endl;
+	}else{
+		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<0<<" "<<0<<std::endl;
+	}
 	ofs.close();
 	return kTRUE;
 }
