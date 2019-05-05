@@ -431,11 +431,11 @@ public:
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",100,-0.5,0.5);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,100,-0.5,0.5);
     for(Int_t i = 0; i < 30;++i){
-      m_h_LargePhiEta[i] = new TH1D(Form("h_LargePhiEta%d",i),"Large;offline #phi;Events",6280,-TMath::Pi(),TMath::Pi());
-      m_h_Sector11PhiEta[i] = new TH1D(Form("h_Sector11PhiEta%d",i),"Sector11;offline #phi;Events",6280,-TMath::Pi(),TMath::Pi());
-      m_h_Sector15PhiEta[i] = new TH1D(Form("h_Sector15PhiEta%d",i),"Sector15;offline #phi;Events",6280,-TMath::Pi(),TMath::Pi());
-      m_h_SmallPhiEta[i] = new TH1D(Form("h_SmallPhiEta%d",i),"Small;offline #phi;Events",6280,-TMath::Pi(),TMath::Pi());
-      m_h_SmallSpecialPhiEta[i] = new TH1D(Form("h_SmallSpecialPhiEta%d",i),"SmallSpecial;offline #phi;Events",6280,-TMath::Pi(),TMath::Pi());
+      m_h_LargePhiEta[i] = new TH1D(Form("h_LargePhiEta%d",i),"Large;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector11PhiEta[i] = new TH1D(Form("h_Sector11PhiEta%d",i),"Sector11;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector15PhiEta[i] = new TH1D(Form("h_Sector15PhiEta%d",i),"Sector15;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallPhiEta[i] = new TH1D(Form("h_SmallPhiEta%d",i),"Small;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallSpecialPhiEta[i] = new TH1D(Form("h_SmallSpecialPhiEta%d",i),"SmallSpecial;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
     }
     //For LUT
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
