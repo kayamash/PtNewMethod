@@ -126,16 +126,16 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     	if(address == 2){
     		Double_t dividePhi = 0.32/28.;
     		for(Int_t loop = 0; loop < 30;++loop){
-    			if(loop == 0 && tmp_phi < 0.26)tmp_par = loop;
+    			if(loop == 0 && tmp_phi < 0.24)tmp_par = loop;
     			if(loop != 0 && loop != 29 && tmp_phi >= 0.24 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < 0.24 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
     			if(loop == 29 && tmp_phi >= 0.56)tmp_par = loop;
     		}
     	}else{
     		Double_t dividePhi = 0.30/28.;
     		for(Int_t loop = 0; loop < 30;++loop){
-    			if(loop == 0 && tmp_phi < 0.24)tmp_par = loop;
-    			if(loop != 0 && loop != 29 && tmp_phi >= 0.24 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < 0.24 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
-    			if(loop == 29 && tmp_phi >= 0.54)tmp_par = loop;
+    			if(loop == 0 && tmp_phi < 0.25)tmp_par = loop;
+    			if(loop != 0 && loop != 29 && tmp_phi >= 0.25 + static_cast<Double_t>(loop - 1)*dividePhi && tmp_phi < 0.25 + static_cast<Double_t>(loop)*dividePhi)tmp_par = loop;
+    			if(loop == 29 && tmp_phi >= 0.55)tmp_par = loop;
     		}
     	}
 
@@ -272,11 +272,11 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		}
 		fitProf->SetParameter(0,fOrder);
 		fitProf->SetParameter(1,sOrder);
-		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(2,-10.,0.);
-		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(2,0.,10.);
-		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(2,0.,10.);
-		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(2,-10.,0.);
-		prof->Fit(fitProf,"I","",binMin*0.01,binMax*0.01);
+		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(1,-10.,0.);
+		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(1,0.,10.);
+		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(1,0.,10.);
+		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(1,-10.,0.);
+		prof->Fit(fitProf,"MQ","",binMin*0.01,binMax*0.01);
 		p0 = fitProf->GetParameter(0);
 		p1 = fitProf->GetParameter(1);
 		chi = fitProf->GetChisquare();
