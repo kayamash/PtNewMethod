@@ -42,7 +42,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     par[2] = (eta > 0) ? (tmp_eta) : (tmp_eta + 15);//Eta　divide to 30
     */
     Int_t tmp_eta = 0;
-    Double_t divideEta = 15./1.05;
+    Double_t divideEta = 1.05/15.;
     for(Int_t loop = 0; loop < 15;++loop){
     	if(std::fabs(eta) >= static_cast<Double_t>(loop)*divideEta && std::fabs(eta) < static_cast<Double_t>(loop + 1)*divideEta)tmp_eta = loop;
     }
