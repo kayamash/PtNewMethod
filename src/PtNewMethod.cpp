@@ -92,6 +92,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	Double_t pSA_superpointR_BEE = 0;
 	Double_t pSA_superpointSlope_BI = 0;
 	Double_t pSA_superpointSlope_BM = 0;
+	Double_t pSA_superpointSlope_BME = 0;
+	Double_t pSA_superpointSlope_BEE = 0;
 	Int_t pEFTAG_pass = -1;
 	for(Int_t method = 0;method < 25;method++){
 		if(m_mes_name->at(method) == m_method_name){
@@ -135,6 +137,8 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 			pSA_superpointR_BEE = m_pSA_superpointR_BEE->at(method);
 			pSA_superpointSlope_BI = m_pSA_superpointSlope_BI->at(method);
 			pSA_superpointSlope_BM = m_pSA_superpointSlope_BM->at(method);
+			pSA_superpointSlope_BME = m_pSA_superpointSlope_BME->at(method);
+			pSA_superpointSlope_BEE = m_pSA_superpointSlope_BEE->at(method);
 		}
 	}
 	if( !CutAll(pEFTAG_pass,pL1_pass) )return;
@@ -162,12 +166,39 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
 	if(BIsegmentcheck)m_h_DeltaThetaBI->Fill(atan(segmentBISlope) - atan(1.0/pSA_superpointSlope_BI) );
 	if(BMsegmentcheck)m_h_DeltaThetaBM->Fill(atan(segmentBMSlope) - atan(1.0/pSA_superpointSlope_BM) );
 
+	Double_t SPZInner = 0;
+	Double_t SPRInner = 0;
+	Double_t SPSlopeInner = 0;
+	Double_t SPZMiddle = 0;
+	Double_t SPRMiddle = 0;
+	Double_t SPSlopeMiddle = 0;
+	if(pSA_superpointR_BI != 0){
+		SPZInner = pSA_superpointZ_BI;
+		SPRInner = pSA_superpointR_BI;
+		SPSlopeInner = pSA_superpointSlope_BI;
+	}
+	if(pSA_superpointR_BEE != 0){
+		SPZInner = pSA_superpointZ_BEE;
+		SPRInner = pSA_superpointR_BEE;
+		SPSlopeInner = pSA_superpointSlope_BEE;
+	}
+	if(pSA_superpointR_BM != 0){
+		SPZMiddle = pSA_superpointZ_BM;
+		SPRMiddle = pSA_superpointR_BM;
+		SPSlopeMiddle = pSA_superpointSlope_BM;
+	}
+	if(pSA_superpointR_BME != 0){
+		SPZMiddle = pSA_superpointZ_BME;
+		SPRMiddle = pSA_superpointR_BME;
+		SPSlopeMiddle = pSA_superpointSlope_BME;
+	}
+
     //barrel alpha
-	if(pSA_superpointR_BM != 0)barrelalpha = atan(pSA_superpointZ_BM/pSA_superpointR_BM) - atan(pSA_superpointSlope_BM);//Reciprocal number?
+	if(SPRMiddle != 0)barrelalpha = atan(SPZMiddle/SPRMiddle) - atan(SPSlopeMiddle);//Reciprocal number?
     //barrel alpha end
 
     //barrel beta
-    if(pSA_superpointR_BI != 0 && pSA_superpointR_BM != 0)barrelbeta = atan(1.0/pSA_superpointSlope_BI) - atan(1.0/pSA_superpointSlope_BM);//Reciprocal number?
+    if(SPRInner != 0 && SPRMiddle != 0)barrelbeta = atan(1.0/SPSlopeInner) - atan(1.0/SPSlopeMiddle);//Reciprocal number?
     //barrel beta end
 
     //Line BI
