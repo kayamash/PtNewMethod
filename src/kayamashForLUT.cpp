@@ -285,6 +285,9 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 			++nLoop;
 			if(nLoop == 100)break;
 		}
+	}else{
+		p0 = fOrder;
+		p1 = sOrder;
 	}
 
 	if(par3 != 0 && par3 != 14 && par3 != 15 && par3 != 29){
