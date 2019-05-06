@@ -225,11 +225,16 @@ private:
   TH1D *m_h_DeltaThetaBM;
   TH1D *m_h_DeltaThetaLineBI;
   TH2F *m_h_PtvsDeltaThetaLineBI;
-  TH1D *m_h_LargePhiEta[30];
-  TH1D *m_h_Sector11PhiEta[30];
-  TH1D *m_h_Sector15PhiEta[30];
-  TH1D *m_h_SmallPhiEta[30];
-  TH1D *m_h_SmallSpecialPhiEta[30];
+  TH1D *m_h_LargePositivePhiEta[30];
+  TH1D *m_h_Sector11PositivePhiEta[30];
+  TH1D *m_h_Sector15PositivePhiEta[30];
+  TH1D *m_h_SmallPositivePhiEta[30];
+  TH1D *m_h_SmallSpecialPositivePhiEta[30];
+  TH1D *m_h_LargeNegativePhiEta[30];
+  TH1D *m_h_Sector11NegativePhiEta[30];
+  TH1D *m_h_Sector15NegativePhiEta[30];
+  TH1D *m_h_SmallNegativePhiEta[30];
+  TH1D *m_h_SmallSpecialNegativePhiEta[30];
   //For LUT
   TH2F *m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];//kayamash
   TH2F *m_h_PtvsBarrelBeta_SectorChargeEtaPhi[5][2][30][30];//kayamash
@@ -431,11 +436,16 @@ public:
     m_h_DeltaThetaLineBI = new TH1D("h_DeltaThetaLineBI","#Delta#theta Line BI;#Delta#theta;Events",100,-0.5,0.5);
     m_h_PtvsDeltaThetaLineBI = new TH2F("h_PtvsDeltaThetaLineBI","offline p_{T} vs #Delta#theta Line BI;offline p_{T}[GeV];#Delta#theta",200,-0.25,99.75,100,-0.5,0.5);
     for(Int_t i = 0; i < 30;++i){
-      m_h_LargePhiEta[i] = new TH1D(Form("h_LargePhiEta%d",i),"Large;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
-      m_h_Sector11PhiEta[i] = new TH1D(Form("h_Sector11PhiEta%d",i),"Sector11;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
-      m_h_Sector15PhiEta[i] = new TH1D(Form("h_Sector15PhiEta%d",i),"Sector15;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
-      m_h_SmallPhiEta[i] = new TH1D(Form("h_SmallPhiEta%d",i),"Small;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
-      m_h_SmallSpecialPhiEta[i] = new TH1D(Form("h_SmallSpecialPhiEta%d",i),"SmallSpecial;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_LargePositivePhiEta[i] = new TH1D(Form("h_LargePositivePhiEta%d",i),"Large;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector11PositivePhiEta[i] = new TH1D(Form("h_Sector11PositivePhiEta%d",i),"Sector11;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector15PositivePhiEta[i] = new TH1D(Form("h_Sector15PositivePhiEta%d",i),"Sector15;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallPositivePhiEta[i] = new TH1D(Form("h_SmallPositivePhiEta%d",i),"Small;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallSpecialPositivePhiEta[i] = new TH1D(Form("h_SmallSpecialPositivePhiEta%d",i),"SmallSpecial;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_LargeNegativePhiEta[i] = new TH1D(Form("h_LargeNegativePhiEta%d",i),"Large;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector11NegativePhiEta[i] = new TH1D(Form("h_Sector11NegativePhiEta%d",i),"Sector11;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_Sector15NegativePhiEta[i] = new TH1D(Form("h_Sector15NegativePhiEta%d",i),"Sector15;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallNegativePhiEta[i] = new TH1D(Form("h_SmallNegativePhiEta%d",i),"Small;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
+      m_h_SmallSpecialNegativePhiEta[i] = new TH1D(Form("h_SmallSpecialNegativePhiEta%d",i),"SmallSpecial;offline #phi;Events",628,-TMath::Pi(),TMath::Pi());
     }
     //For LUT
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
@@ -483,6 +493,16 @@ public:
     delete  m_h_DeltaThetaLineBI;
     delete  m_h_PtvsDeltaThetaLineBI;
     for(Int_t i = 0; i < 30; ++i){
+      delete  m_h_LargePositivePhiEta[i];
+      delete  m_h_Sector11PositivePhiEta[i];
+      delete  m_h_Sector15PositivePhiEta[i];
+      delete  m_h_SmallPositivePhiEta[i];
+      delete  m_h_SmallSpecialPositivePhiEta[i];
+      delete  m_h_LargeNegativevePhiEta[i];
+      delete  m_h_Sector11NegativePhiEta[i];
+      delete  m_h_Sector15NegativePhiEta[i];
+      delete  m_h_SmallNegativePhiEta[i];
+      delete  m_h_SmallSpecialNegativePhiEta[i];
     }
     for(Int_t sector = 0; sector < 5;++sector){//Large,LargeSpecial sector11,LargeSpecial sector 15,Small,SmallSpecial
       for(Int_t charge = 0; charge < 2;++charge){//positive,negative

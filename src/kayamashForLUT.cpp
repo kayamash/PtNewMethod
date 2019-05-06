@@ -267,8 +267,15 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(1,0.,100.);
 		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(1,0.,100.);
 		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(1,-100.,0.);
+		prof->Fit(fitProf,"Q","",binMin*0.01,binMax*0.01);
+		p0 = fitProf->GetParameter(0);
+		p1 = fitProf->GetParameter(1);
+		chi = fitProf->GetChisquare();
+		Ndof = fitProf->GetNDF();
+		pValue = TMath::Prob(chi, Ndof);
+
 		Int_t nLoop = 0;
-		while(pValue >= 0.01){
+		while(pValue <= 0.01){//develop fit
 			prof->Fit(fitProf,"MQ","",binMin*0.01,binMax*0.01);
 			p0 = fitProf->GetParameter(0);
 			p1 = fitProf->GetParameter(1);

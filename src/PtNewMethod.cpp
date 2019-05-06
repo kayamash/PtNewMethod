@@ -186,19 +186,24 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     bool LUTcheck = LUT.getLUTparameter(pSA_sAddress,m_poff_charge,m_poff_eta,m_poff_phi,LUTparameter,phiInteg);
     if(LUTcheck)switch(LUTparameter[0]){
     	case 0:
-    	m_h_LargePhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_LargePositivePhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == -1.)m_h_LargeNegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 1:
-    	m_h_Sector11PhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_Sector11PositivePhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == -1.)m_h_Sector11NegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 2:
-    	m_h_Sector15PhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_Sector15PositivePhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == -1.)m_h_Sector15NegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 3:
-    	m_h_SmallPhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_SmallPPositivehiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == -1.)m_h_SmallNegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 4:
-    	m_h_SmallSpecialPhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_SmallSpecialPositivePhiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == -1.)m_h_SmallSpecialNegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     }
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
@@ -352,12 +357,40 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     m_h_PtvsBarrelBeta_LSNegative->Write();
     m_h_PtvsBarrelBeta_SSPositive->Write();
     m_h_PtvsBarrelBeta_SSNegative->Write();
+    tf1->mkdir("PhiPlot");
+    tf1->mkdir("PhiPlot/Positive");
+    tf1->mkdir("PhiPlot/Positive/Large");
+    tf1->mkdir("PhiPlot/Positive/Sector11");
+    tf1->mkdir("PhiPlot/Positive/Sector15");
+    tf1->mkdir("PhiPlot/Positive/Small");
+    tf1->mkdir("PhiPlot/Positive/SmallSpecial");
+    tf1->mkdir("PhiPlot/Negative");
+    tf1->mkdir("PhiPlot/Negative/Large");
+    tf1->mkdir("PhiPlot/Negative/Sector11");
+    tf1->mkdir("PhiPlot/Negative/Sector15");
+    tf1->mkdir("PhiPlot/Negative/Small");
+    tf1->mkdir("PhiPlot/Negative/SmallSpecial");
     for(Int_t i = 0; i < 30;++i){
-    	m_h_LargePhiEta[i]->Write();
-    	m_h_Sector11PhiEta[i]->Write();
-    	m_h_Sector15PhiEta[i]->Write();
-    	m_h_SmallPhiEta[i]->Write();
-    	m_h_SmallSpecialPhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Positive/Large");
+    	m_h_LargePositivePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Positive/Sector11");
+    	m_h_Sector11PositivePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Positive/Sector15");
+    	m_h_Sector15PositivePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Positive/Small");
+    	m_h_SmallPositivePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Positive/SmallSpecial");
+    	m_h_SmallSpecialPositivePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Negative/Large");
+    	m_h_LargeNegativePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Negative/Sector11");
+    	m_h_Sector11NegativePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Negative/Sector15");
+    	m_h_Sector15NegativePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Negative/Small");
+    	m_h_SmallNegativePhiEta[i]->Write();
+    	tf1->cd("PhiPlot/Negative/SmallSpecial");
+    	m_h_SmallSpecialNegativePhiEta[i]->Write();
     }
 	cout<<"finish!!"<<endl;
 }
