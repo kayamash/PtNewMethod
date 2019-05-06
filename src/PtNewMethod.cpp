@@ -198,7 +198,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     	if(m_poff_charge == -1.)m_h_Sector15NegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 3:
-    	if(m_poff_charge == 1.)m_h_SmallPositivehiEta[LUTparameter[2]]->Fill(phiInteg);
+    	if(m_poff_charge == 1.)m_h_SmallPositivePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	if(m_poff_charge == -1.)m_h_SmallNegativePhiEta[LUTparameter[2]]->Fill(phiInteg);
     	break;
     	case 4:
