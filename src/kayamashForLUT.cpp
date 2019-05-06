@@ -136,7 +136,7 @@ bool kayamashForLUT::getLUTparameter(Double_t address,Double_t charge,Double_t e
     tmp_phi1 = tmp_phi;
 
     if(par[0] >= 0 && par[1] >= 0 && par[2] >= 0 && par[3] >= 0)return kTRUE;
-    if(address >= 0)cerr<<" missing getLUTparameter"<<endl;
+    if(address >= 0 )cerr<<" missing getLUTparameter"<<endl;
     return kFALSE;
 }
 
@@ -276,7 +276,7 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	}
 
 	if(par3 != 0 && par3 != 14 && par3 != 15 && par3 != 29){
-		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<std::endl;
+		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<" "<<TMath::pValue<<std::endl;
 	}else{
 		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<0<<" "<<0<<std::endl;
 	}
