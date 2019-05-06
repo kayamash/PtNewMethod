@@ -498,7 +498,7 @@ public:
       delete  m_h_Sector15PositivePhiEta[i];
       delete  m_h_SmallPositivePhiEta[i];
       delete  m_h_SmallSpecialPositivePhiEta[i];
-      delete  m_h_LargeNegativevePhiEta[i];
+      delete  m_h_LargeNegativePhiEta[i];
       delete  m_h_Sector11NegativePhiEta[i];
       delete  m_h_Sector15NegativePhiEta[i];
       delete  m_h_SmallNegativePhiEta[i];
