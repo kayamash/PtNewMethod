@@ -263,20 +263,25 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 		}
 		fitProf->SetParameter(0,fOrder);
 		fitProf->SetParameter(1,sOrder);
-		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(1,-10.,0.);
-		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(1,0.,10.);
-		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(1,0.,10.);
-		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(1,-10.,0.);
-		prof->Fit(fitProf,"MQ","",binMin*0.01,binMax*0.01);
-		p0 = fitProf->GetParameter(0);
-		p1 = fitProf->GetParameter(1);
-		chi = fitProf->GetChisquare();
-		Ndof = fitProf->GetNDF();
-		pValue = TMath::Prob(chi, Ndof);
+		if(alpha == kTRUE && par2 == 0)fitProf->SetParLimits(1,-100.,0.);
+		if(alpha == kTRUE && par2 == 1)fitProf->SetParLimits(1,0.,100.);
+		if(alpha == kFALSE && par2 == 0)fitProf->SetParLimits(1,0.,100.);
+		if(alpha == kFALSE && par2 == 1)fitProf->SetParLimits(1,-100.,0.);
+		Int_t nLoop = 0;
+		while(pValue >= 0.01){
+			prof->Fit(fitProf,"MQ","",binMin*0.01,binMax*0.01);
+			p0 = fitProf->GetParameter(0);
+			p1 = fitProf->GetParameter(1);
+			chi = fitProf->GetChisquare();
+			Ndof = fitProf->GetNDF();
+			pValue = TMath::Prob(chi, Ndof);
+			++nLoop;
+			if(nLoop == 100)break;
+		}
 	}
 
 	if(par3 != 0 && par3 != 14 && par3 != 15 && par3 != 29){
-		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<" "<<pValue<<std::endl;
+		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<p0<<" "<<p1<<std::endl;
 	}else{
 		ofs<<par1<<" "<<par2<<" "<<par3<<" "<<par4<<" "<<0<<" "<<0<<std::endl;
 	}
