@@ -311,8 +311,22 @@ bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t &par1,Doub
 			par1 = parameter1;
 			par2 = parameter2;
 			check = kTRUE;
+			return kTRUE;
 		}
 	}
 	if(check)return kTRUE;
 	return kFALSE;
+}
+
+bool kayamashForLUT::ReadLUT(std::string lut,Double_t (&par)[2][2][30][30][2]){
+	ifstream ifs(lut.c_str());
+	while(!ifs.eof()){
+		Int_t parameter[4] = {0,0,0,0};
+		Double_t parA = 0;
+		Double_t parB = 0;
+		ifs>>parameter[0]>>parameter[1]>>parameter[2]>>parameter[3]>>parA>>parB;
+		par[parameter[0]][parameter[1]][parameter[2]][parameter[3]][0] = parA;
+		par[parameter[0]][parameter[1]][parameter[2]][parameter[3]][1] = parB;
+	}
+	return kTRUE;
 }
