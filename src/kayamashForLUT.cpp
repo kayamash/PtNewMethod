@@ -318,7 +318,7 @@ bool kayamashForLUT::ReadLUT(Int_t (&par)[4],std::string lut,Double_t &par1,Doub
 	return kFALSE;
 }
 
-bool kayamashForLUT::ReadLUT(std::string lut,Double_t (&par)[2][2][30][30][2]){
+bool kayamashForLUT::ReadLUT(std::string lut,Double_t (&par)[5][2][30][30][2]){
 	ifstream ifs(lut.c_str());
 	while(!ifs.eof()){
 		Int_t parameter[4] = {0,0,0,0};
