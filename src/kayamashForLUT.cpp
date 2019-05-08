@@ -285,6 +285,10 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 			++nLoop;
 			if(nLoop == 100)break;
 		}
+		if(binMax*0.01 <= 0.1){
+			p0 = fOrder;
+			p1 = sOrder;
+		}
 	}else{
 		p0 = fOrder;
 		p1 = sOrder;

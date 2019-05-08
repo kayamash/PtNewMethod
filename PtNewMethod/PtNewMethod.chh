@@ -127,7 +127,6 @@ private:
   Int_t m_proc;
   Int_t m_etaMax;
   Int_t m_phiMax;
-  Int_t m_par_PtvsBarrelAlpha_SectorChargeEtaPhi[5][2][30][30];
 
   //TBranch *b_aipc;
   TBranch *b_eNumber;
@@ -465,7 +464,6 @@ public:
             m_h_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TH2F(Form("h_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),"Pt vs Barrel #beta;1/P_{T};#alpha",30,0.,0.3,100,-0.5,0.5);
             m_prof_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelAlpha%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
             m_prof_PtvsBarrelBeta_SectorChargeEtaPhi[sector][charge][eta][phi] = new TProfile(Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),Form("prof_PtvsBarrelBeta%d%d%02d%02d",sector,charge,eta,phi),30,0.,0.3);
-            m_par_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi] = 0;
           }
         }
       }
