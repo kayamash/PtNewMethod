@@ -240,6 +240,7 @@ void PtNewMethod::Loop(Int_t ev,std::string name,Int_t proc){
     if(LUTcheck && barrelalpha != -99999)m_h_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     if(LUTcheck && barrelbeta != -99999)m_h_PtvsBarrelBeta_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelbeta);
     if(LUTcheck && barrelalpha != -99999){
+    	m_par_PtvsBarrelAlpha_SectorChargeEtaPhi[LUTparameter[0]][LUTparameter[1]][LUTparameter[2]][LUTparameter[3]]++;
     	m_h_BarrelAlpha->Fill(barrelalpha);
         m_h_PtvsBarrelAlpha->Fill(1.0/std::fabs(m_poff_pt*0.001),barrelalpha);
     	switch(static_cast<Int_t>(pSA_sAddress)){
@@ -422,6 +423,15 @@ void PtNewMethod::Finalize(TFile *tf1,std::string filenameA,std::string filename
     	m_h_SmallNegativePhiEta[i]->Write();
     	tf1->cd("PhiPlot/Negative/SmallSpecial");
     	m_h_SmallSpecialNegativePhiEta[i]->Write();
+    }
+    for(Int_t sector = 0; sector < 5; ++sector){
+    	for(Int_t charge = 0; charge < 2; ++charge){
+    		for(Int_t eta = 0; eta < 30; ++eta){
+    			for(Int_t phi = 0; phi < 30; ++phi){
+    				cout<<sector<<" "<<charge<<" "<<eta<<" "<<phi<<" "<<m_par_PtvsBarrelAlpha_SectorChargeEtaPhi[sector][charge][eta][phi]<<endl;
+    			}
+    		}
+    	}
     }
 	cout<<"finish!!"<<endl;
 }
