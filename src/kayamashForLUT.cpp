@@ -244,8 +244,8 @@ bool kayamashForLUT::WriteLUT(TProfile *prof,Int_t par1,Int_t par2,Int_t par3,In
 	ofstream ofs;
 	ofs.open(filename.c_str(),std::ios::app);
 	prof->Draw();
-	Double_t p0 = 0;
-	Double_t p1 = 0;
+	Double_t p0 = fOrder;
+	Double_t p1 = sOrder;
 	Double_t Ndof = 0;
 	Double_t chi = 0;
 	Double_t pValue = 0;
